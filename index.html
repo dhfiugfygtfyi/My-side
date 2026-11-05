@@ -3,15 +3,58 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Регистрация</title>
+  <title>Вход и регистрация</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <main class="card">
-    <h1>Регистрация</h1>
-    <p class="subtitle">Создайте аккаунт — это займёт меньше минуты.</p>
+    <div class="tabs" role="tablist" aria-label="Режим формы">
+      <button type="button" class="tab" id="tab-login" role="tab"
+              aria-selected="false" aria-controls="login-form" data-target="login-form">Вход</button>
+      <button type="button" class="tab is-active" id="tab-register" role="tab"
+              aria-selected="true" aria-controls="register-form" data-target="register-form">Регистрация</button>
+    </div>
 
-    <form id="register-form" novalidate>
+    <h1 id="form-title">Регистрация</h1>
+    <p class="subtitle" id="form-subtitle">Создайте аккаунт — это займёт меньше минуты.</p>
+
+    <!-- Форма входа -->
+    <form id="login-form" class="panel" novalidate hidden>
+      <div class="field">
+        <label for="login-username">Имя пользователя</label>
+        <input id="login-username" name="username" type="text" autocomplete="username"
+               placeholder="например, player_one">
+        <span class="error" id="login-username-error"></span>
+      </div>
+
+      <div class="field">
+        <label for="login-password">Пароль</label>
+        <div class="input-wrap">
+          <input id="login-password" name="password" type="password" autocomplete="current-password"
+                 placeholder="Ваш пароль">
+          <button type="button" class="toggle-password" data-target="login-password"
+                  aria-label="Показать пароль" title="Показать пароль" aria-pressed="false">
+            <svg class="icon-eye" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M2 12s3.6-6.5 10-6.5S22 12 22 12s-3.6 6.5-10 6.5S2 12 2 12Z" />
+              <circle cx="12" cy="12" r="3" />
+            </svg>
+            <svg class="icon-eye-off" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M2 12s3.6-6.5 10-6.5S22 12 22 12s-3.6 6.5-10 6.5S2 12 2 12Z" />
+              <circle cx="12" cy="12" r="3" />
+              <line x1="3" y1="21" x2="21" y2="3" />
+            </svg>
+          </button>
+        </div>
+        <span class="error" id="login-password-error"></span>
+      </div>
+
+      <button type="submit" class="btn">Войти</button>
+
+      <div class="message" id="login-message" role="status" aria-live="polite"></div>
+    </form>
+
+    <!-- Форма регистрации -->
+    <form id="register-form" class="panel" novalidate>
       <div class="field">
         <label for="username">Имя пользователя</label>
         <input id="username" name="username" type="text" autocomplete="username"
@@ -21,15 +64,43 @@
 
       <div class="field">
         <label for="password">Пароль</label>
-        <input id="password" name="password" type="password" autocomplete="new-password"
-               placeholder="Минимум 6 символов">
+        <div class="input-wrap">
+          <input id="password" name="password" type="password" autocomplete="new-password"
+                 placeholder="Минимум 6 символов">
+          <button type="button" class="toggle-password" data-target="password"
+                  aria-label="Показать пароль" title="Показать пароль" aria-pressed="false">
+            <svg class="icon-eye" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M2 12s3.6-6.5 10-6.5S22 12 22 12s-3.6 6.5-10 6.5S2 12 2 12Z" />
+              <circle cx="12" cy="12" r="3" />
+            </svg>
+            <svg class="icon-eye-off" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M2 12s3.6-6.5 10-6.5S22 12 22 12s-3.6 6.5-10 6.5S2 12 2 12Z" />
+              <circle cx="12" cy="12" r="3" />
+              <line x1="3" y1="21" x2="21" y2="3" />
+            </svg>
+          </button>
+        </div>
         <span class="error" id="password-error"></span>
       </div>
 
       <div class="field">
         <label for="confirm">Подтвердите пароль</label>
-        <input id="confirm" name="confirm" type="password" autocomplete="new-password"
-               placeholder="Повторите пароль">
+        <div class="input-wrap">
+          <input id="confirm" name="confirm" type="password" autocomplete="new-password"
+                 placeholder="Повторите пароль">
+          <button type="button" class="toggle-password" data-target="confirm"
+                  aria-label="Показать пароль" title="Показать пароль" aria-pressed="false">
+            <svg class="icon-eye" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M2 12s3.6-6.5 10-6.5S22 12 22 12s-3.6 6.5-10 6.5S2 12 2 12Z" />
+              <circle cx="12" cy="12" r="3" />
+            </svg>
+            <svg class="icon-eye-off" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M2 12s3.6-6.5 10-6.5S22 12 22 12s-3.6 6.5-10 6.5S2 12 2 12Z" />
+              <circle cx="12" cy="12" r="3" />
+              <line x1="3" y1="21" x2="21" y2="3" />
+            </svg>
+          </button>
+        </div>
         <span class="error" id="confirm-error"></span>
       </div>
 
