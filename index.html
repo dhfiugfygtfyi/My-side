@@ -3,142 +3,42 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Hello World</title>
-  <style>
-    :root {
-      color-scheme: dark;
-      --accent-1: #22d3ee;
-      --accent-2: #6366f1;
-      --accent-3: #a855f7;
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      min-height: 100vh;
-      display: grid;
-      place-items: center;
-      font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
-      background: radial-gradient(circle at 20% 20%, #1e3a8a, #0f172a 55%, #020617);
-      color: #e2e8f0;
-      padding: 24px;
-    }
-
-    .card {
-      max-width: 560px;
-      width: 100%;
-      padding: 48px 40px;
-      border-radius: 24px;
-      text-align: center;
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
-      backdrop-filter: blur(10px);
-    }
-
-    h1 {
-      margin: 0 0 12px;
-      font-size: clamp(2.4rem, 8vw, 4rem);
-      line-height: 1.1;
-      background: linear-gradient(90deg, var(--accent-1), var(--accent-2), var(--accent-3));
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      transition: background 0.4s ease;
-    }
-
-    p {
-      margin: 0;
-      font-size: 1.05rem;
-      color: #94a3b8;
-    }
-
-    .actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      justify-content: center;
-      margin-top: 32px;
-    }
-
-    .btn {
-      appearance: none;
-      border: 1px solid rgba(255, 255, 255, 0.18);
-      background: rgba(255, 255, 255, 0.08);
-      color: #e2e8f0;
-      font: inherit;
-      font-weight: 600;
-      padding: 12px 20px;
-      border-radius: 999px;
-      cursor: pointer;
-      text-decoration: none;
-      transition: transform 0.15s ease, background 0.2s ease, border-color 0.2s ease;
-    }
-
-    .btn:hover {
-      background: rgba(255, 255, 255, 0.16);
-      border-color: rgba(255, 255, 255, 0.35);
-      transform: translateY(-2px);
-    }
-
-    .btn:active {
-      transform: translateY(0);
-    }
-
-    .btn.primary {
-      border: none;
-      background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
-      color: #0b1020;
-    }
-
-    .greeting {
-      min-height: 24px;
-      margin-top: 20px;
-      font-size: 1rem;
-      color: #a5f3fc;
-    }
-  </style>
+  <title>Регистрация</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <main class="card">
-    <h1>Hello World</h1>
-    <p>Мой первый простой сайт, выложенный на GitHub.</p>
+    <h1>Регистрация</h1>
+    <p class="subtitle">Создайте аккаунт — это займёт меньше минуты.</p>
 
-    <div class="actions">
-      <button class="btn primary" id="greet">Поздороваться</button>
-      <button class="btn" id="color">Сменить цвет</button>
-      <a class="btn" href="https://github.com/dhfiugfygtfyi/My-side" target="_blank" rel="noopener">Мой GitHub</a>
-    </div>
+    <form id="register-form" novalidate>
+      <div class="field">
+        <label for="username">Имя пользователя</label>
+        <input id="username" name="username" type="text" autocomplete="username"
+               placeholder="например, player_one">
+        <span class="error" id="username-error"></span>
+      </div>
 
-    <div class="greeting" id="greeting"></div>
+      <div class="field">
+        <label for="password">Пароль</label>
+        <input id="password" name="password" type="password" autocomplete="new-password"
+               placeholder="Минимум 6 символов">
+        <span class="error" id="password-error"></span>
+      </div>
+
+      <div class="field">
+        <label for="confirm">Подтвердите пароль</label>
+        <input id="confirm" name="confirm" type="password" autocomplete="new-password"
+               placeholder="Повторите пароль">
+        <span class="error" id="confirm-error"></span>
+      </div>
+
+      <button type="submit" class="btn">Зарегистрироваться</button>
+
+      <div class="message" id="message" role="status" aria-live="polite"></div>
+    </form>
   </main>
 
-  <script>
-    const greeting = document.getElementById("greeting");
-
-    document.getElementById("greet").addEventListener("click", () => {
-      greeting.textContent = greeting.textContent ? "" : "Привет! 👋 Рад тебя видеть.";
-    });
-
-    const palettes = [
-      ["#22d3ee", "#6366f1", "#a855f7"],
-      ["#f472b6", "#fb7185", "#f59e0b"],
-      ["#34d399", "#22d3ee", "#818cf8"],
-      ["#facc15", "#fb923c", "#f43f5e"]
-    ];
-    let paletteIndex = 0;
-
-    document.getElementById("color").addEventListener("click", () => {
-      paletteIndex = (paletteIndex + 1) % palettes.length;
-      const [a, b, c] = palettes[paletteIndex];
-      const root = document.documentElement.style;
-      root.setProperty("--accent-1", a);
-      root.setProperty("--accent-2", b);
-      root.setProperty("--accent-3", c);
-    });
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
