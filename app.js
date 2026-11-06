@@ -17,6 +17,10 @@ const message = document.getElementById("message");
 
 const widget = document.querySelector(".cf-turnstile");
 
+const usersSection = document.getElementById("users-section");
+const usersBody = document.getElementById("users-body");
+const usersCount = document.getElementById("users-count");
+
 const fields = [
   { input: loginInput, error: loginError },
   { input: emailInput, error: emailError },
@@ -86,6 +90,34 @@ function saveUser(user) {
   users.push(user);
   localStorage.setItem(STORAGE_KEY, JSON.stringify(users));
 }
+
+// Таблица зарегистрированных: логин и email, без пароля.
+function renderUsers() {
+  if (!usersSection || !usersBody) return;
+
+  const users = loadUsers();
+
+  usersBody.textContent = "";
+  users.forEach((user) => {
+    const row = document.createElement("tr");
+
+    const loginCell = document.createElement("td");
+    loginCell.textContent = user.login ?? "";
+
+    const emailCell = document.createElement("td");
+    emailCell.textContent = user.email ?? "";
+
+    row.append(loginCell, emailCell);
+    usersBody.append(row);
+  });
+
+  usersSection.hidden = users.length === 0;
+  if (usersCount) {
+    usersCount.textContent = users.length ? `${users.length} чел.` : "";
+  }
+}
+
+renderUsers();
 
 // Убираем ошибку поля, как только пользователь начал его исправлять.
 fields.forEach((field) => {
@@ -179,6 +211,7 @@ form.addEventListener("submit", (event) => {
 
   // Пароль не сохраняем — только логин и email.
   saveUser({ login: login, email: email });
+  renderUsers();
 
   showMessage("Регистрация успешна!", "success");
 
