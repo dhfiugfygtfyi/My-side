@@ -87,6 +87,19 @@ function saveUser(user) {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(users));
 }
 
+// ?reset=1 — очистить данные сайта в этом браузере без консоли.
+// Открыл ссылку — и localStorage/sessionStorage этого сайта пусты.
+if (new URLSearchParams(location.search).get("reset") === "1") {
+  try {
+    localStorage.removeItem(STORAGE_KEY);
+    sessionStorage.clear();
+  } catch {
+    /* хранилище может быть недоступно — не критично */
+  }
+  showMessage("Данные сайта в этом браузере удалены.", "success");
+  history.replaceState(null, "", location.pathname);
+}
+
 // Убираем ошибку поля, как только пользователь начал его исправлять.
 fields.forEach((field) => {
   field.input.addEventListener("input", () => {
