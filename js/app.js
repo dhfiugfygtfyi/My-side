@@ -17,6 +17,14 @@
   var SESSION_KEY = "gitcom_currentUser";
   var SITE_KEY = "0x4AAAAAAF1yWfZCbvIg8Vsw";
 
+  // Страницы внутри pages/ задают data-base="../", чтобы ссылки на
+  // login.html и register.html оставались корректными.
+  var BASE = document.documentElement.getAttribute("data-base") || "";
+
+  function siteUrl(path) {
+    return BASE + path;
+  }
+
   /* ---------------- пользователи ---------------- */
 
   function loadUsers() {
@@ -220,12 +228,12 @@
       } else {
         var loginLink = document.createElement("a");
         loginLink.className = "btn btn-ghost btn-sm";
-        loginLink.href = "login.html";
+        loginLink.href = siteUrl("login.html");
         loginLink.textContent = "Войти";
 
         var registerLink = document.createElement("a");
         registerLink.className = "btn btn-primary btn-sm";
-        registerLink.href = "register.html";
+        registerLink.href = siteUrl("register.html");
         registerLink.textContent = "Регистрация";
 
         area.appendChild(loginLink);
@@ -700,7 +708,7 @@
       showAlreadyLoggedIn();
 
       if (!document.getElementById("guest-view") && !document.getElementById("user-view")) {
-        window.location.href = "login.html";
+        window.location.href = siteUrl("login.html");
       }
     });
 
