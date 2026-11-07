@@ -307,6 +307,44 @@
     });
   }
 
+  function setupTurnstile() {
+    var widget = document.querySelector(".cf-turnstile");
+    if (!widget) return null;
+
+    widget.setAttribute("data-sitekey", SITE_KEY);
+
+    // Если api.js отрисовал виджет с плейсхолдером — перерисовываем с ключом.
+    window.addEventListener("load", function () {
+      if (!window.turnstile) return;
+      if (widget.querySelector("iframe")) return;
+      try {
+        window.turnstile.render(widget, { sitekey: SITE_KEY, theme: "dark" });
+      } catch (error) {
+        /* виджет уже отрисован — не критично */
+      }
+    });
+
+    return widget;
+  }
+
+  function getCaptchaToken() {
+    if (!window.turnstile) return "";
+    try {
+      return window.turnstile.getResponse() || "";
+    } catch (error) {
+      return "";
+    }
+  }
+
+  function resetCaptcha() {
+    if (!window.turnstile) return;
+    try {
+      window.turnstile.reset();
+    } catch (error) {
+      /* виджет мог ещё не отрисоваться — не критично */
+    }
+  }
+
   function showAlreadyLoggedIn() {
     var notice = document.getElementById("already-notice");
     var name = document.getElementById("already-name");
@@ -327,11 +365,13 @@
     var passwordInput = document.getElementById("password");
     var loginError = document.getElementById("login-error");
     var passwordError = document.getElementById("password-error");
+    var captchaError = document.getElementById("captcha-error");
     var formMessage = document.getElementById("form-message");
     var submit = document.getElementById("login-submit");
     var card = form.closest(".auth-card");
 
     initPasswordToggle();
+    setupTurnstile();
     showAlreadyLoggedIn();
 
     [loginInput, passwordInput].forEach(function (input) {
@@ -339,6 +379,7 @@
       input.addEventListener("input", function () {
         if (input === loginInput) setFieldError(loginInput, loginError, "");
         if (input === passwordInput) setFieldError(passwordInput, passwordError, "");
+        setFieldError(null, captchaError, "");
         setFormMessage(formMessage, "", "");
       });
     });
@@ -348,6 +389,7 @@
 
       setFieldError(loginInput, loginError, "");
       setFieldError(passwordInput, passwordError, "");
+      setFieldError(null, captchaError, "");
       setFormMessage(formMessage, "", "");
 
       var identifier = loginInput ? loginInput.value.trim() : "";
@@ -366,6 +408,22 @@
 
       if (!valid) {
         setFormMessage(formMessage, "Заполните оба поля.", "error");
+        return;
+      }
+
+      if (!window.turnstile) {
+        setFieldError(
+          null,
+          captchaError,
+          "Капча не загрузилась. Проверьте интернет и обновите страницу."
+        );
+        setFormMessage(formMessage, "Капча недоступна.", "error");
+        return;
+      }
+
+      if (!getCaptchaToken()) {
+        setFieldError(null, captchaError, "Подтвердите, что вы не робот.");
+        setFormMessage(formMessage, "Решите капчу.", "error");
         return;
       }
 
@@ -423,6 +481,7 @@
         }
 
         setSession(user.login);
+        resetCaptcha();
         setFormMessage(formMessage, "Успешно! Входим…", "success");
         window.location.href = "index.html";
       });
@@ -447,21 +506,8 @@
     var card = form.closest(".auth-card");
 
     initPasswordToggle();
+    setupTurnstile();
     showAlreadyLoggedIn();
-
-    var widget = document.querySelector(".cf-turnstile");
-    if (widget) widget.setAttribute("data-sitekey", SITE_KEY);
-
-    // Если api.js отрисовал виджет с плейсхолдером — перерисовываем с ключом.
-    window.addEventListener("load", function () {
-      if (!widget || !window.turnstile) return;
-      if (widget.querySelector("iframe")) return;
-      try {
-        window.turnstile.render(widget, { sitekey: SITE_KEY, theme: "dark" });
-      } catch (error) {
-        /* виджет уже отрисован — не критично */
-      }
-    });
 
     [
       { input: loginInput, error: loginError },
@@ -474,15 +520,6 @@
         setFormMessage(formMessage, "", "");
       });
     });
-
-    function getCaptchaToken() {
-      if (!window.turnstile) return "";
-      try {
-        return window.turnstile.getResponse() || "";
-      } catch (error) {
-        return "";
-      }
-    }
 
     form.addEventListener("submit", function (event) {
       event.preventDefault();
@@ -601,9 +638,7 @@
         setSession(login);
         setFormMessage(formMessage, "Регистрация успешна! Входим…", "success");
 
-        if (window.turnstile) {
-          try { window.turnstile.reset(); } catch (error) { /* ignore */ }
-        }
+        resetCaptcha();
 
         window.setTimeout(function () {
           window.location.href = "index.html";

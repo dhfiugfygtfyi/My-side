@@ -8,6 +8,7 @@
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
   <link rel="stylesheet" href="style.css">
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </head>
 <body>
   <header class="site-header">
@@ -52,6 +53,11 @@
                     aria-label="Показать пароль" aria-pressed="false">Показать</button>
           </div>
           <span class="field-error" id="password-error"></span>
+        </div>
+
+        <div class="field">
+          <div class="cf-turnstile" data-sitekey="0x4AAAAAAF1yWfZCbvIg8Vsw" data-theme="dark"></div>
+          <span class="field-error" id="captcha-error"></span>
         </div>
 
         <p class="form-message" id="form-message" role="alert" aria-live="assertive"></p>
