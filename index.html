@@ -3,52 +3,95 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Регистрация</title>
+  <title>My-side — главная</title>
   <link rel="icon" href="favicon.ico" sizes="any">
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
   <link rel="stylesheet" href="style.css">
-  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </head>
 <body>
-  <main class="card">
-    <h1>Регистрация</h1>
-    <p class="subtitle">Создайте аккаунт — это займёт меньше минуты.</p>
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a class="brand" href="index.html">
+        <span class="brand-mark" aria-hidden="true">◈</span>
+        <span class="brand-name">My<span class="brand-accent">-side</span></span>
+      </a>
+      <nav class="nav" aria-label="Основная навигация">
+        <a class="is-active" href="index.html" aria-current="page">Главная</a>
+        <a href="login.html">Вход</a>
+        <a href="register.html">Регистрация</a>
+      </nav>
+      <div class="auth-area" data-auth-area></div>
+    </div>
+  </header>
 
-    <form id="register-form" novalidate>
-      <div class="field">
-        <label for="login">Логин</label>
-        <input id="login" name="login" type="text" autocomplete="username"
-               placeholder="например, player_one">
-        <span class="error" id="login-error"></span>
+  <main class="page">
+    <section class="hero">
+      <p class="eyebrow">Личный кабинет</p>
+      <h1>My-side</h1>
+      <p class="lead">Демо-сайт с регистрацией и входом. Аккаунты хранятся локально в вашем браузере — без сервера и без отправки данных.</p>
+    </section>
+
+    <section class="panel" id="guest-view" hidden>
+      <h2>Вы пока не вошли</h2>
+      <p class="muted">Войдите в существующий аккаунт или создайте новый — это займёт меньше минуты.</p>
+      <div class="actions">
+        <a class="btn btn-primary" href="login.html">Войти</a>
+        <a class="btn btn-ghost" href="register.html">Создать аккаунт</a>
+      </div>
+    </section>
+
+    <section class="panel" id="user-view" hidden>
+      <div class="account">
+        <span class="avatar" id="user-initial" aria-hidden="true">?</span>
+        <div>
+          <h2 class="account-title">Привет, <span id="user-name">—</span>!</h2>
+          <p class="muted">Вы вошли в аккаунт My-side.</p>
+        </div>
       </div>
 
-      <div class="field">
-        <label for="email">Email</label>
-        <input id="email" name="email" type="email" autocomplete="email"
-               placeholder="you@example.com">
-        <span class="error" id="email-error"></span>
+      <dl class="account-facts">
+        <div>
+          <dt>Логин</dt>
+          <dd id="user-login">—</dd>
+        </div>
+        <div>
+          <dt>Email</dt>
+          <dd id="user-email">—</dd>
+        </div>
+        <div>
+          <dt>Аккаунт создан</dt>
+          <dd id="user-since">—</dd>
+        </div>
+      </dl>
+
+      <div class="actions">
+        <button type="button" class="btn btn-ghost" data-logout>Выйти</button>
       </div>
+    </section>
 
-      <div class="field">
-        <label for="password">Пароль</label>
-        <input id="password" name="password" type="password" autocomplete="new-password"
-               placeholder="Минимум 6 символов">
-        <span class="error" id="password-error"></span>
-      </div>
-
-      <div class="field">
-        <div class="cf-turnstile" data-sitekey="SITE_KEY" data-theme="light"></div>
-        <span class="error" id="captcha-error"></span>
-      </div>
-
-      <button type="submit" class="btn">Зарегистрироваться</button>
-
-      <div class="message" id="message" role="status" aria-live="polite"></div>
-    </form>
-
-    <p class="hint">Демо без сервера: логин и email сохраняются только в этом браузере.</p>
+    <section class="cards" aria-label="Возможности">
+      <article class="mini-card">
+        <span class="mini-icon" aria-hidden="true">🔐</span>
+        <h3>Вход по логину или email</h3>
+        <p>Один аккаунт — два способа войти. Пароль проверяется по хешу, а не по открытому тексту.</p>
+      </article>
+      <article class="mini-card">
+        <span class="mini-icon" aria-hidden="true">🧾</span>
+        <h3>Регистрация с капчей</h3>
+        <p>Cloudflare Turnstile защищает форму от ботов. После регистрации вход выполняется автоматически.</p>
+      </article>
+      <article class="mini-card">
+        <span class="mini-icon" aria-hidden="true">💾</span>
+        <h3>Всё локально</h3>
+        <p>Данные лежат в <code>localStorage</code> этого браузера. Очистите его — аккаунт исчезнет.</p>
+      </article>
+    </section>
   </main>
+
+  <footer class="site-footer">
+    <p>My-side · демо без сервера · данные хранятся в localStorage</p>
+  </footer>
 
   <script src="app.js"></script>
 </body>
