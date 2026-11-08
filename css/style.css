@@ -237,6 +237,49 @@ img {
   justify-content: flex-end;
 }
 
+/* ---------- переключатель языка ---------- */
+
+.lang-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 3px;
+  border: 1px solid var(--border);
+  border-radius: 11px;
+  background: var(--surface-2);
+}
+
+.lang-btn {
+  min-width: 30px;
+  padding: 4px 6px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--muted);
+  font: inherit;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  cursor: pointer;
+  transition: color 0.18s ease, background 0.18s ease;
+}
+
+.lang-btn:hover {
+  color: var(--text);
+  background: var(--accent-soft);
+}
+
+.lang-btn.is-active {
+  color: var(--text-strong);
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1px rgba(96, 165, 250, 0.35);
+}
+
+.lang-btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
 .greeting {
   font-size: 0.92rem;
   color: var(--muted);
@@ -1525,6 +1568,12 @@ input.invalid {
 @media (max-width: 520px) {
   .brand-name {
     font-size: 1rem;
+  }
+
+  .lang-btn {
+    min-width: 26px;
+    padding: 3px 5px;
+    font-size: 0.72rem;
   }
 
   .lang-grid {

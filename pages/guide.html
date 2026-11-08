@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="ru" data-theme="dark" data-base="../">
+<html lang="ru" data-theme="dark" data-base="../" data-title-key="guide.titleDefault">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Гайд по языку программирования — My-side</title>
-  <meta name="description" content="Пошаговый гайд по языку программирования: установка окружения, первая программа, запуск и что учить дальше.">
+  <meta name="description" content="Пошаговый гайд по языку программирования: установка окружения, первая программа, запуск и что учить дальше." data-i18n-content="guide.description">
   <link rel="icon" href="../favicon.ico" sizes="any">
   <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16.png">
@@ -12,6 +12,7 @@
   <link rel="stylesheet" id="hljs-dark" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
   <link rel="stylesheet" id="hljs-light" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css" disabled>
   <script src="../js/theme.js"></script>
+  <script src="../js/i18n.js"></script>
 </head>
 <body>
   <header class="site-header">
@@ -20,26 +21,30 @@
         <span class="brand-mark" aria-hidden="true">◈</span>
         <span class="brand-name">My<span class="brand-accent">-side</span></span>
       </a>
-      <nav class="nav" id="site-nav" aria-label="Основная навигация">
-        <a href="../index.html">Каталог</a>
+      <nav class="nav" id="site-nav" aria-label="Основная навигация" data-i18n-aria="nav.aria">
+        <a href="../index.html" data-i18n="nav.catalog">Каталог</a>
       </nav>
       <div class="header-actions">
+        <div class="lang-switch" data-lang-switch role="group" aria-label="Язык сайта" data-i18n-aria="lang.aria">
+          <button type="button" class="lang-btn" data-lang="ru" aria-pressed="false">RU</button>
+          <button type="button" class="lang-btn" data-lang="en" aria-pressed="false">EN</button>
+        </div>
         <button type="button" class="theme-toggle" data-theme-toggle aria-label="Переключить тему" aria-pressed="false">☀️</button>
         <div class="auth-area" data-auth-area></div>
-        <button type="button" class="nav-toggle" data-nav-toggle aria-label="Открыть меню" aria-expanded="false" aria-controls="site-nav">☰</button>
+        <button type="button" class="nav-toggle" data-nav-toggle aria-label="Открыть меню" data-i18n-aria="nav.openMenu" aria-expanded="false" aria-controls="site-nav">☰</button>
       </div>
     </div>
   </header>
 
   <main class="guide-page">
     <div id="guide-root">
-      <p class="muted">Загрузка гайда…</p>
+      <p class="muted" data-i18n="guide.loading">Загрузка гайда…</p>
     </div>
   </main>
 
   <footer class="site-footer">
-    <p>My-side · каталог гайдов по языкам программирования</p>
-    <p><a href="../index.html">Вернуться в каталог</a></p>
+    <p data-i18n="footer.catalog">My-side · каталог гайдов по языкам программирования</p>
+    <p><a href="../index.html" data-i18n="footer.back">Вернуться в каталог</a></p>
   </footer>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>

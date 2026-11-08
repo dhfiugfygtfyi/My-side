@@ -1,17 +1,11 @@
 /* ============================================================
    My-side — страница гайда.
-   Адрес: pages/guide.html?lang=python
-   Содержимое берётся из data/languages.json и data/guides.json.
+   Адрес: pages/guide.html?lang=python&hl=en
+   Содержимое берётся из data/languages(.en).json
+   и data/guides(.en).json.
    ============================================================ */
 (function () {
   "use strict";
-
-  var PURPOSE_LABELS = {
-    web: "Веб",
-    games: "Игры",
-    mobile: "Мобильные приложения",
-    data: "Анализ данных"
-  };
 
   var CODE_LABELS = {
     python: "Python",
@@ -36,6 +30,25 @@
 
   var root = document.getElementById("guide-root");
 
+  function i18n() {
+    return window.MYSIDE_I18N || null;
+  }
+
+  function tr(key, vars) {
+    var api = i18n();
+    return api && api.t ? api.t(key, vars) : key;
+  }
+
+  function langLink(url) {
+    var api = i18n();
+    return api && api.link ? api.link(url) : url;
+  }
+
+  function dataPath(base) {
+    var api = i18n();
+    return api && api.dataFile ? api.dataFile(base) : base + ".json";
+  }
+
   function escapeHtml(value) {
     return String(value == null ? "" : value)
       .replace(/&/g, "&amp;")
@@ -46,16 +59,18 @@
   }
 
   function purposeLabel(key) {
-    return PURPOSE_LABELS[key] || key;
+    return tr("purpose." + key);
   }
 
   function codeLabel(language) {
-    return CODE_LABELS[language] || String(language || "код").toUpperCase();
+    if (language === "bash") return tr("code.terminal");
+    if (CODE_LABELS[language]) return CODE_LABELS[language];
+    return String(language || tr("code.default")).toUpperCase();
   }
 
   function fetchJson(path) {
     return fetch(path, { cache: "no-cache" }).then(function (response) {
-      if (!response.ok) throw new Error("HTTP " + response.status + " для " + path);
+      if (!response.ok) throw new Error("HTTP " + response.status + " for " + path);
       return response.json();
     });
   }
@@ -68,7 +83,7 @@
       '<div class="code-block">' +
         '<div class="code-block__bar">' +
           '<span class="code-block__lang">' + escapeHtml(codeLabel(language)) + "</span>" +
-          '<button type="button" class="copy-btn" data-copy>Копировать</button>' +
+          '<button type="button" class="copy-btn" data-copy>' + escapeHtml(tr("guide.copy")) + "</button>" +
         "</div>" +
         "<pre><code class=\"language-" + escapeHtml(language) + "\">" +
           escapeHtml(block.code) +
@@ -119,7 +134,7 @@
             '<a class="link-card" href="' + escapeHtml(item.href) + '">' +
               "<strong>" + escapeHtml(item.title) + "</strong>" +
               "<span>" + escapeHtml(item.text) + "</span>" +
-              '<span class="arrow">Перейти →</span>' +
+              '<span class="arrow">' + escapeHtml(tr("guide.visit")) + "</span>" +
             "</a>"
           );
         }).join("") + "</div>";
@@ -142,7 +157,7 @@
 
   function renderHero(language) {
     var meta = [];
-    if (language.year) meta.push("с " + language.year);
+    if (language.year) meta.push(tr("card.since", { year: language.year }));
     if (language.difficulty) meta.push(language.difficulty);
     if (language.paradigm) meta.push(language.paradigm);
     (language.purposes || []).forEach(function (key) {
@@ -155,13 +170,13 @@
 
     badges.push(
       language.full === false
-        ? '<span class="badge badge--wip">Гайд в разработке</span>'
-        : '<span class="badge">Полный гайд</span>'
+        ? '<span class="badge badge--wip">' + escapeHtml(tr("guide.wip")) + "</span>"
+        : '<span class="badge">' + escapeHtml(tr("guide.full")) + "</span>"
     );
 
     return (
-      '<nav class="breadcrumbs" aria-label="Хлебные крошки">' +
-        '<a href="../index.html">Каталог языков</a>' +
+      '<nav class="breadcrumbs" aria-label="' + escapeHtml(tr("guide.breadcrumbsAria")) + '">' +
+        '<a href="' + escapeHtml(langLink("../index.html")) + '">' + escapeHtml(tr("guide.catalog")) + "</a>" +
         '<span class="sep">/</span>' +
         "<span>" + escapeHtml(language.name) + "</span>" +
       "</nav>" +
@@ -193,16 +208,18 @@
 
     var nav =
       '<div class="guide-nav">' +
-        '<a class="btn btn-ghost" href="../index.html">← Все языки</a>' +
-        '<a class="btn btn-primary" href="guide.html?lang=' +
-          encodeURIComponent(nextLanguageSlug(language.slug)) + '">Следующий гайд →</a>' +
+        '<a class="btn btn-ghost" href="' + escapeHtml(langLink("../index.html")) + '">' +
+          escapeHtml(tr("guide.allLanguages")) + "</a>" +
+        '<a class="btn btn-primary" href="' +
+          escapeHtml(langLink("guide.html?lang=" + encodeURIComponent(nextLanguageSlug(language.slug)))) + '">' +
+          escapeHtml(tr("guide.next")) + "</a>" +
       "</div>";
 
     return (
       '<div class="guide-layout">' +
         '<div class="guide-content">' + content + nav + "</div>" +
-        '<aside class="guide-toc" aria-label="Содержание гайда">' +
-          "<h2>Содержание</h2>" +
+        '<aside class="guide-toc" aria-label="' + escapeHtml(tr("guide.tocAria")) + '">' +
+          "<h2>" + escapeHtml(tr("guide.toc")) + "</h2>" +
           "<ol>" + toc + "</ol>" +
         "</aside>" +
       "</div>"
@@ -218,40 +235,41 @@
 
     var related = fullGuides.map(function (item) {
       return (
-        '<a class="link-card" href="guide.html?lang=' + encodeURIComponent(item.slug) + '">' +
+        '<a class="link-card" href="' +
+          escapeHtml(langLink("guide.html?lang=" + encodeURIComponent(item.slug))) + '">' +
           "<strong>" + escapeHtml(item.icon || "") + " " + escapeHtml(item.name) + "</strong>" +
           "<span>" + escapeHtml(item.tagline) + "</span>" +
-          '<span class="arrow">Открыть гайд →</span>' +
+          '<span class="arrow">' + escapeHtml(tr("guide.open")) + "</span>" +
         "</a>"
       );
     }).join("");
 
     var topics = [
-      "Установка окружения",
-      "Первая программа",
-      "Запуск и отладка",
-      "Переменные и типы",
-      "Условия и циклы",
-      "Куда двигаться дальше"
-    ].map(function (topic) {
-      return '<span class="badge">' + escapeHtml(topic) + "</span>";
+      "topic.environment",
+      "topic.firstProgram",
+      "topic.runDebug",
+      "topic.variables",
+      "topic.conditions",
+      "topic.next"
+    ].map(function (key) {
+      return '<span class="badge">' + escapeHtml(tr(key)) + "</span>";
     }).join("");
 
     return (
       '<div class="stub-card">' +
         '<div class="stub-icon" aria-hidden="true">' + escapeHtml(language.icon || "🚧") + "</div>" +
-        "<h2>Гайд в разработке</h2>" +
+        "<h2>" + escapeHtml(tr("guide.stubTitle")) + "</h2>" +
         "<p>" + escapeHtml(language.description) + "</p>" +
-        "<p>Полный разбор " + escapeHtml(language.name) +
-          " появится позже. А пока можно изучить языки, для которых гайды уже готовы.</p>" +
+        "<p>" + escapeHtml(tr("guide.stubText", { name: language.name })) + "</p>" +
         '<div class="stub-topics">' + topics + "</div>" +
         '<div class="stub-actions">' +
-          '<a class="btn btn-primary" href="../index.html">← Вернуться в каталог</a>' +
+          '<a class="btn btn-primary" href="' + escapeHtml(langLink("../index.html")) + '">' +
+            escapeHtml(tr("guide.backCatalog")) + "</a>" +
         "</div>" +
       "</div>" +
       (related
         ? '<section class="guide-section" style="margin-top:18px">' +
-            "<h2>Другие полные гайды</h2>" +
+            "<h2>" + escapeHtml(tr("guide.otherFull")) + "</h2>" +
             '<div class="link-cards">' + related + "</div>" +
           "</section>"
         : "")
@@ -277,13 +295,15 @@
   function renderError(message, details) {
     if (!root) return;
     root.innerHTML =
-      '<nav class="breadcrumbs"><a href="../index.html">Каталог языков</a></nav>' +
+      '<nav class="breadcrumbs"><a href="' + escapeHtml(langLink("../index.html")) + '">' +
+        escapeHtml(tr("guide.catalog")) + "</a></nav>" +
       '<div class="stub-card">' +
         '<div class="stub-icon" aria-hidden="true">🤔</div>' +
         "<h2>" + escapeHtml(message) + "</h2>" +
         (details ? "<p>" + escapeHtml(details) + "</p>" : "") +
         '<div class="stub-actions">' +
-          '<a class="btn btn-primary" href="../index.html">Перейти в каталог</a>' +
+          '<a class="btn btn-primary" href="' + escapeHtml(langLink("../index.html")) + '">' +
+            escapeHtml(tr("guide.error.toCatalog")) + "</a>" +
         "</div>" +
       "</div>";
   }
@@ -314,20 +334,20 @@
 
       var text = code.textContent;
       var done = function () {
-        button.textContent = "Скопировано";
+        button.textContent = tr("guide.copied");
         button.classList.add("is-copied");
         window.setTimeout(function () {
-          button.textContent = "Копировать";
+          button.textContent = tr("guide.copy");
           button.classList.remove("is-copied");
         }, 1600);
       };
 
       if (navigator.clipboard && navigator.clipboard.writeText) {
         navigator.clipboard.writeText(text).then(done).catch(function () {
-          button.textContent = "Не удалось";
+          button.textContent = tr("guide.copyFailed");
         });
       } else {
-        button.textContent = "Недоступно";
+        button.textContent = tr("guide.copyUnavailable");
       }
     });
   }
@@ -368,13 +388,13 @@
     var slug = params.get("lang");
 
     if (!slug) {
-      renderError("Язык не выбран", "Откройте гайд из каталога — там ссылки уже с нужным языком.");
+      renderError(tr("guide.error.noLangTitle"), tr("guide.error.noLangText"));
       return;
     }
 
     Promise.all([
-      fetchJson("../data/languages.json"),
-      fetchJson("../data/guides.json").catch(function () {
+      fetchJson(dataPath("../data/languages")),
+      fetchJson(dataPath("../data/guides")).catch(function () {
         return {};
       })
     ])
@@ -393,11 +413,14 @@
         }
 
         if (!language) {
-          renderError("Язык не найден", "В каталоге нет языка с кодом «" + slug + "».");
+          renderError(
+            tr("guide.error.notFoundTitle"),
+            tr("guide.error.notFoundText", { slug: slug })
+          );
           return;
         }
 
-        document.title = language.name + " — гайд | My-side";
+        document.title = tr("guide.title", { name: language.name });
         document.documentElement.style.setProperty("--guide-color", language.color || "#3b82f6");
 
         var guide = guides[slug];
@@ -413,9 +436,8 @@
       })
       .catch(function (error) {
         renderError(
-          "Не удалось загрузить гайд",
-          "Проверьте, что файлы data/languages.json и data/guides.json доступны. " +
-          "При открытии через file:// нужен локальный сервер. " + (error && error.message ? error.message : "")
+          tr("guide.error.loadTitle"),
+          tr("guide.error.loadText") + " " + (error && error.message ? error.message : "")
         );
       });
   }

@@ -25,6 +25,21 @@
     return BASE + path;
   }
 
+  function i18nApi() {
+    return window.MYSIDE_I18N || null;
+  }
+
+  function tr(key, vars) {
+    var api = i18nApi();
+    return api && api.t ? api.t(key, vars) : key;
+  }
+
+  function langLink(path) {
+    var url = siteUrl(path);
+    var api = i18nApi();
+    return api && api.link ? api.link(url) : url;
+  }
+
   /* ---------------- пользователи ---------------- */
 
   function loadUsers() {
@@ -211,7 +226,7 @@
       if (user) {
         var greeting = document.createElement("span");
         greeting.className = "greeting";
-        greeting.appendChild(document.createTextNode("Привет, "));
+        greeting.appendChild(document.createTextNode(tr("auth.greeting")));
 
         var name = document.createElement("strong");
         name.textContent = user.login;
@@ -221,20 +236,20 @@
         logout.type = "button";
         logout.className = "btn btn-ghost btn-sm";
         logout.setAttribute("data-logout", "");
-        logout.textContent = "Выйти";
+        logout.textContent = tr("auth.logout");
 
         area.appendChild(greeting);
         area.appendChild(logout);
       } else {
         var loginLink = document.createElement("a");
         loginLink.className = "btn btn-ghost btn-sm";
-        loginLink.href = siteUrl("login.html");
-        loginLink.textContent = "Войти";
+        loginLink.href = langLink("login.html");
+        loginLink.textContent = tr("auth.login");
 
         var registerLink = document.createElement("a");
         registerLink.className = "btn btn-primary btn-sm";
-        registerLink.href = siteUrl("register.html");
-        registerLink.textContent = "Регистрация";
+        registerLink.href = langLink("register.html");
+        registerLink.textContent = tr("auth.register");
 
         area.appendChild(loginLink);
         area.appendChild(registerLink);
@@ -269,8 +284,10 @@
   function formatDate(timestamp) {
     var date = new Date(timestamp);
     if (isNaN(date.getTime())) return "—";
+    var api = i18nApi();
+    var locale = api && api.lang === "en" ? "en-GB" : "ru-RU";
     try {
-      return date.toLocaleDateString("ru-RU", {
+      return date.toLocaleDateString(locale, {
         day: "2-digit",
         month: "long",
         year: "numeric"
@@ -308,9 +325,9 @@
     toggle.addEventListener("click", function () {
       var visible = input.type === "text";
       input.type = visible ? "password" : "text";
-      toggle.textContent = visible ? "Показать" : "Скрыть";
+      toggle.textContent = visible ? tr("login.show") : tr("login.hide");
       toggle.setAttribute("aria-pressed", visible ? "false" : "true");
-      toggle.setAttribute("aria-label", visible ? "Показать пароль" : "Скрыть пароль");
+      toggle.setAttribute("aria-label", visible ? tr("login.showAria") : tr("login.hideAria"));
       input.focus();
     });
   }
@@ -405,17 +422,17 @@
       var valid = true;
 
       if (!identifier) {
-        setFieldError(loginInput, loginError, "Введите имя пользователя или email.");
+        setFieldError(loginInput, loginError, tr("err.enterIdentifier"));
         valid = false;
       }
 
       if (!password) {
-        setFieldError(passwordInput, passwordError, "Введите пароль.");
+        setFieldError(passwordInput, passwordError, tr("err.enterPassword"));
         valid = false;
       }
 
       if (!valid) {
-        setFormMessage(formMessage, "Заполните оба поля.", "error");
+        setFormMessage(formMessage, tr("err.fillBoth"), "error");
         return;
       }
 
@@ -423,15 +440,15 @@
         setFieldError(
           null,
           captchaError,
-          "Капча не загрузилась. Проверьте интернет и обновите страницу."
+          tr("err.captchaLoad")
         );
-        setFormMessage(formMessage, "Капча недоступна.", "error");
+        setFormMessage(formMessage, tr("err.captchaUnavailable"), "error");
         return;
       }
 
       if (!getCaptchaToken()) {
-        setFieldError(null, captchaError, "Подтвердите, что вы не робот.");
-        setFormMessage(formMessage, "Решите капчу.", "error");
+        setFieldError(null, captchaError, tr("err.confirmHuman"));
+        setFormMessage(formMessage, tr("err.solveCaptcha"), "error");
         return;
       }
 
@@ -440,7 +457,7 @@
       if (!user) {
         setFormMessage(
           formMessage,
-          "Пользователь с таким именем или email не найден.",
+          tr("err.userNotFound"),
           "error"
         );
         shake(card);
@@ -448,7 +465,7 @@
       }
 
       submit.disabled = true;
-      submit.textContent = "Проверяем…";
+      submit.textContent = tr("login.submitting");
 
       var check;
 
@@ -469,10 +486,10 @@
       check.then(function (ok) {
         if (ok === null) {
           submit.disabled = false;
-          submit.textContent = "Войти";
+          submit.textContent = tr("login.submit");
           setFormMessage(
             formMessage,
-            "Не удалось проверить пароль в этом браузере. Откройте сайт по https.",
+            tr("err.passwordCheck"),
             "error"
           );
           return;
@@ -480,9 +497,9 @@
 
         if (!ok) {
           submit.disabled = false;
-          submit.textContent = "Войти";
-          setFieldError(passwordInput, passwordError, "Пароль не подошёл.");
-          setFormMessage(formMessage, "Неверный пароль. Попробуйте ещё раз.", "error");
+          submit.textContent = tr("login.submit");
+          setFieldError(passwordInput, passwordError, tr("err.wrongPassword"));
+          setFormMessage(formMessage, tr("err.wrongPasswordTry"), "error");
           shake(card);
           if (passwordInput) passwordInput.select();
           return;
@@ -490,8 +507,8 @@
 
         setSession(user.login);
         resetCaptcha();
-        setFormMessage(formMessage, "Успешно! Входим…", "success");
-        window.location.href = "index.html";
+        setFormMessage(formMessage, tr("msg.successLogin"), "success");
+        window.location.href = langLink("index.html");
       });
     });
   }
@@ -544,43 +561,43 @@
       var valid = true;
 
       if (!login) {
-        setFieldError(loginInput, loginError, "Введите логин.");
+        setFieldError(loginInput, loginError, tr("err.enterLogin"));
         valid = false;
       } else if (login.length < 3) {
-        setFieldError(loginInput, loginError, "Логин должен содержать минимум 3 символа.");
+        setFieldError(loginInput, loginError, tr("err.loginShort"));
         valid = false;
       }
 
       if (!email) {
-        setFieldError(emailInput, emailError, "Введите email.");
+        setFieldError(emailInput, emailError, tr("err.enterEmail"));
         valid = false;
       } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-        setFieldError(emailInput, emailError, "Введите корректный email.");
+        setFieldError(emailInput, emailError, tr("err.emailInvalid"));
         valid = false;
       }
 
       if (!password) {
-        setFieldError(passwordInput, passwordError, "Введите пароль.");
+        setFieldError(passwordInput, passwordError, tr("err.enterPassword"));
         valid = false;
       } else if (password.length < 6) {
-        setFieldError(passwordInput, passwordError, "Пароль должен содержать минимум 6 символов.");
+        setFieldError(passwordInput, passwordError, tr("err.passwordShort"));
         valid = false;
       }
 
       if (!valid) {
-        setFormMessage(formMessage, "Проверьте выделенные поля.", "error");
+        setFormMessage(formMessage, tr("err.checkFields"), "error");
         return;
       }
 
       if (!window.turnstile) {
-        setFieldError(null, captchaError, "Капча не загрузилась. Проверьте интернет и обновите страницу.");
-        setFormMessage(formMessage, "Капча недоступна.", "error");
+        setFieldError(null, captchaError, tr("err.captchaLoad"));
+        setFormMessage(formMessage, tr("err.captchaUnavailable"), "error");
         return;
       }
 
       if (!getCaptchaToken()) {
-        setFieldError(null, captchaError, "Подтвердите, что вы не робот.");
-        setFormMessage(formMessage, "Решите капчу.", "error");
+        setFieldError(null, captchaError, tr("err.confirmHuman"));
+        setFormMessage(formMessage, tr("err.solveCaptcha"), "error");
         return;
       }
 
@@ -593,19 +610,19 @@
       });
 
       if (duplicateLogin) {
-        setFieldError(loginInput, loginError, "Пользователь с таким логином уже зарегистрирован.");
-        setFormMessage(formMessage, "Проверьте выделенные поля.", "error");
+        setFieldError(loginInput, loginError, tr("err.loginTaken"));
+        setFormMessage(formMessage, tr("err.checkFields"), "error");
         return;
       }
 
       if (duplicateEmail) {
-        setFieldError(emailInput, emailError, "Этот email уже зарегистрирован.");
-        setFormMessage(formMessage, "Проверьте выделенные поля.", "error");
+        setFieldError(emailInput, emailError, tr("err.emailTaken"));
+        setFormMessage(formMessage, tr("err.checkFields"), "error");
         return;
       }
 
       submit.disabled = true;
-      submit.textContent = "Сохраняем…";
+      submit.textContent = tr("register.submitting");
 
       makePasswordHash(password).then(function (result) {
         var freshUsers = loadUsers();
@@ -618,9 +635,9 @@
 
         if (taken) {
           submit.disabled = false;
-          submit.textContent = "Зарегистрироваться";
-          setFieldError(loginInput, loginError, "Такие данные уже зарегистрированы.");
-          setFormMessage(formMessage, "Проверьте выделенные поля.", "error");
+          submit.textContent = tr("register.submit");
+          setFieldError(loginInput, loginError, tr("err.dataTaken"));
+          setFormMessage(formMessage, tr("err.checkFields"), "error");
           return;
         }
 
@@ -634,22 +651,22 @@
 
         if (!saveUsers(freshUsers)) {
           submit.disabled = false;
-          submit.textContent = "Зарегистрироваться";
+          submit.textContent = tr("register.submit");
           setFormMessage(
             formMessage,
-            "Не удалось сохранить данные: хранилище браузера недоступно.",
+            tr("err.storage"),
             "error"
           );
           return;
         }
 
         setSession(login);
-        setFormMessage(formMessage, "Регистрация успешна! Входим…", "success");
+        setFormMessage(formMessage, tr("msg.successRegister"), "success");
 
         resetCaptcha();
 
         window.setTimeout(function () {
-          window.location.href = "index.html";
+          window.location.href = langLink("index.html");
         }, 700);
       });
     });
@@ -680,7 +697,7 @@
 
     var message = document.getElementById("form-message");
     if (message) {
-      setFormMessage(message, "Данные сайта в этом браузере удалены.", "success");
+      setFormMessage(message, tr("msg.resetDone"), "success");
     }
 
     if (window.history && window.history.replaceState) {
@@ -708,7 +725,7 @@
       showAlreadyLoggedIn();
 
       if (!document.getElementById("guest-view") && !document.getElementById("user-view")) {
-        window.location.href = siteUrl("login.html");
+        window.location.href = langLink("login.html");
       }
     });
 

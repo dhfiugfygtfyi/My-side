@@ -1,15 +1,16 @@
 <!DOCTYPE html>
-<html lang="ru" data-theme="dark">
+<html lang="ru" data-theme="dark" data-title-key="index.title">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Каталог гайдов по языкам программирования — My-side</title>
-  <meta name="description" content="Каталог гайдов по языкам программирования: Python, JavaScript, C++, Java, C#, Go, Rust и другие. Поиск, фильтры и пошаговые руководства на русском.">
+  <meta name="description" content="Каталог гайдов по языкам программирования: Python, JavaScript, C++, Java, C#, Go, Rust и другие. Поиск, фильтры и пошаговые руководства на русском и английском." data-i18n-content="index.description">
   <link rel="icon" href="favicon.ico" sizes="any">
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
   <link rel="stylesheet" href="css/style.css">
   <script src="js/theme.js"></script>
+  <script src="js/i18n.js"></script>
 </head>
 <body>
   <header class="site-header">
@@ -18,79 +19,83 @@
         <span class="brand-mark" aria-hidden="true">◈</span>
         <span class="brand-name">My<span class="brand-accent">-side</span></span>
       </a>
-      <nav class="nav" id="site-nav" aria-label="Основная навигация">
-        <a class="is-active" href="index.html" aria-current="page">Каталог</a>
+      <nav class="nav" id="site-nav" aria-label="Основная навигация" data-i18n-aria="nav.aria">
+        <a class="is-active" href="index.html" aria-current="page" data-i18n="nav.catalog">Каталог</a>
       </nav>
       <div class="header-actions">
+        <div class="lang-switch" data-lang-switch role="group" aria-label="Язык сайта" data-i18n-aria="lang.aria">
+          <button type="button" class="lang-btn" data-lang="ru" aria-pressed="false">RU</button>
+          <button type="button" class="lang-btn" data-lang="en" aria-pressed="false">EN</button>
+        </div>
         <button type="button" class="theme-toggle" data-theme-toggle aria-label="Переключить тему" aria-pressed="false">☀️</button>
         <div class="auth-area" data-auth-area></div>
-        <button type="button" class="nav-toggle" data-nav-toggle aria-label="Открыть меню" aria-expanded="false" aria-controls="site-nav">☰</button>
+        <button type="button" class="nav-toggle" data-nav-toggle aria-label="Открыть меню" data-i18n-aria="nav.openMenu" aria-expanded="false" aria-controls="site-nav">☰</button>
       </div>
     </div>
   </header>
 
   <main class="page">
     <section class="catalog-hero">
-      <p class="eyebrow">Каталог гайдов</p>
-      <h1>Языки программирования</h1>
-      <p class="lead">
+      <p class="eyebrow" data-i18n="index.eyebrow">Каталог гайдов</p>
+      <h1 data-i18n="index.h1">Языки программирования</h1>
+      <p class="lead" data-i18n="index.lead">
         Пошаговые руководства для тех, кто начинает с нуля: что это за язык, как установить окружение,
         написать первую программу и куда двигаться дальше. Выберите направление или найдите язык поиском.
       </p>
       <div class="catalog-stats">
-        <span class="stat-pill"><strong id="stat-total">15</strong> языков</span>
-        <span class="stat-pill"><strong id="stat-full">5</strong> полных гайдов</span>
-        <span class="stat-pill"><strong>4</strong> направления</span>
-        <span class="stat-pill">🇷🇺 всё на русском</span>
+        <span class="stat-pill"><strong id="stat-total">15</strong> <span data-i18n="index.stat.languages">языков</span></span>
+        <span class="stat-pill"><strong id="stat-full">5</strong> <span data-i18n="index.stat.full">полных гайдов</span></span>
+        <span class="stat-pill"><strong>4</strong> <span data-i18n="index.stat.directions">направления</span></span>
+        <span class="stat-pill" data-i18n="index.stat.lang">🇷🇺 всё на русском</span>
       </div>
     </section>
 
-    <section class="controls" aria-label="Поиск и фильтры">
+    <section class="controls" aria-label="Поиск и фильтры" data-i18n-aria="index.controlsAria">
       <div class="controls-row">
         <div class="search-field">
           <span class="search-icon" aria-hidden="true">🔍</span>
-          <label class="visually-hidden" for="catalog-search">Поиск по каталогу</label>
+          <label class="visually-hidden" for="catalog-search" data-i18n="index.searchLabel">Поиск по каталогу</label>
           <input id="catalog-search" type="search" autocomplete="off"
-                 placeholder="Найти язык: Python, веб, игры, анализ данных…">
-          <button type="button" class="search-clear" id="search-clear" aria-label="Очистить поиск" hidden>✕</button>
+                 placeholder="Найти язык: Python, веб, игры, анализ данных…" data-i18n-placeholder="index.searchPlaceholder">
+          <button type="button" class="search-clear" id="search-clear" aria-label="Очистить поиск" data-i18n-aria="index.clearSearch" hidden>✕</button>
         </div>
 
         <div class="sort-field">
-          <label for="catalog-sort">Сортировка</label>
+          <label for="catalog-sort" data-i18n="index.sort">Сортировка</label>
           <select id="catalog-sort">
-            <option value="popular">По популярности</option>
-            <option value="alphabet">По алфавиту</option>
-            <option value="year">По году появления</option>
+            <option value="popular" data-i18n="index.sort.popular">По популярности</option>
+            <option value="alphabet" data-i18n="index.sort.alphabet">По алфавиту</option>
+            <option value="year" data-i18n="index.sort.year">По году появления</option>
           </select>
         </div>
       </div>
 
-      <div class="chips" role="group" aria-label="Фильтр по назначению">
-        <button type="button" class="chip is-active" data-purpose="all" aria-pressed="true">Все</button>
-        <button type="button" class="chip" data-purpose="web" aria-pressed="false">Веб</button>
-        <button type="button" class="chip" data-purpose="games" aria-pressed="false">Игры</button>
-        <button type="button" class="chip" data-purpose="mobile" aria-pressed="false">Мобильные приложения</button>
-        <button type="button" class="chip" data-purpose="data" aria-pressed="false">Анализ данных</button>
+      <div class="chips" role="group" aria-label="Фильтр по назначению" data-i18n-aria="index.filterAria">
+        <button type="button" class="chip is-active" data-purpose="all" aria-pressed="true" data-i18n="index.chip.all">Все</button>
+        <button type="button" class="chip" data-purpose="web" aria-pressed="false" data-i18n="index.chip.web">Веб</button>
+        <button type="button" class="chip" data-purpose="games" aria-pressed="false" data-i18n="index.chip.games">Игры</button>
+        <button type="button" class="chip" data-purpose="mobile" aria-pressed="false" data-i18n="index.chip.mobile">Мобильные приложения</button>
+        <button type="button" class="chip" data-purpose="data" aria-pressed="false" data-i18n="index.chip.data">Анализ данных</button>
       </div>
     </section>
 
     <div class="catalog-meta">
-      <span id="catalog-count">Загрузка каталога…</span>
-      <span class="muted">Данные о языках лежат в <code>data/languages.json</code></span>
+      <span id="catalog-count" data-i18n="index.loading">Загрузка каталога…</span>
+      <span class="muted" data-i18n-html="index.dataNote">Данные о языках лежат в <code>data/languages.json</code></span>
     </div>
 
-    <section id="lang-grid" class="lang-grid" aria-label="Языки программирования"></section>
+    <section id="lang-grid" class="lang-grid" aria-label="Языки программирования" data-i18n-aria="index.gridAria"></section>
 
     <section id="catalog-empty" class="empty-state" hidden>
-      <h2>Ничего не найдено</h2>
-      <p>Попробуйте изменить запрос или сбросить фильтры.</p>
-      <button type="button" class="btn btn-ghost" id="catalog-reset">Сбросить фильтры</button>
+      <h2 data-i18n="index.emptyTitle">Ничего не найдено</h2>
+      <p data-i18n="index.emptyText">Попробуйте изменить запрос или сбросить фильтры.</p>
+      <button type="button" class="btn btn-ghost" id="catalog-reset" data-i18n="index.reset">Сбросить фильтры</button>
     </section>
   </main>
 
   <footer class="site-footer">
-    <p>My-side · каталог гайдов по языкам программирования</p>
-    <p>Данные о языках — в <code>data/languages.json</code> · гайды — в <code>data/guides.json</code></p>
+    <p data-i18n="footer.catalog">My-side · каталог гайдов по языкам программирования</p>
+    <p data-i18n-html="footer.data">Данные о языках — в <code>data/languages.json</code> · гайды — в <code>data/guides.json</code></p>
   </footer>
 
   <script src="js/app.js"></script>

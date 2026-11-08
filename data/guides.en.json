@@ -1,0 +1,823 @@
+{
+  "python": {
+    "sections": [
+      {
+        "id": "what",
+        "title": "1. What this language is and what it is for",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Python is a high-level general-purpose language with simple, readable syntax. Code blocks are indented rather than wrapped in curly braces, so a program looks almost like plain text."
+          },
+          {
+            "type": "list",
+            "items": [
+              "Data analysis and machine learning — pandas, NumPy, scikit-learn, PyTorch.",
+              "Web backend — Django, Flask, FastAPI.",
+              "Automation — scripts, file handling, web scraping, bots.",
+              "Science and engineering — computations, visualization, image processing."
+            ]
+          },
+          {
+            "type": "p",
+            "text": "Python is slower than C++ and Java, but it wins on development speed. That is why it is popular where getting results quickly matters more than squeezing out the last milliseconds."
+          }
+        ]
+      },
+      {
+        "id": "install",
+        "title": "2. Installing and setting up the environment",
+        "blocks": [
+          {
+            "type": "steps",
+            "items": [
+              {
+                "title": "Download Python",
+                "text": "Open python.org/downloads and click Download Python 3.12 or newer. The site will detect your operating system automatically."
+              },
+              {
+                "title": "Run the installer",
+                "text": "On the first screen, make sure to check “Add python.exe to PATH” — otherwise the python command will not be found in the terminal. Then click Install Now."
+              },
+              {
+                "title": "Verify the installation",
+                "text": "Open a new terminal (PowerShell or Command Prompt) and run the commands below. If the version appears, you are all set."
+              },
+              {
+                "title": "Install an editor",
+                "text": "VS Code works well: install it from code.visualstudio.com and add the Python extension by Microsoft. PyCharm Community Edition is another option."
+              }
+            ]
+          },
+          {
+            "type": "code",
+            "language": "bash",
+            "code": "python --version\npip --version"
+          },
+          {
+            "type": "note",
+            "text": "On Windows, the python command may be unavailable if PATH was not refreshed. In that case use py --version or reinstall Python with the PATH checkbox enabled."
+          }
+        ]
+      },
+      {
+        "id": "hello",
+        "title": "3. Your first program: Hello, world!",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Create a folder called hello and a file hello.py inside it. Open it in your editor and write one line:"
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "code": "# hello.py\nprint(\"Hello, world!\")"
+          },
+          {
+            "type": "p",
+            "text": "Let's break down each part of the program:"
+          },
+          {
+            "type": "lines",
+            "items": [
+              {
+                "code": "# hello.py",
+                "text": "A comment. Python ignores everything that starts with a hash. Comments are for people, not for the computer."
+              },
+              {
+                "code": "print",
+                "text": "The name of the built-in output function. It is already part of Python, so there is no need to import it."
+              },
+              {
+                "code": "( ... )",
+                "text": "Parentheses mean a function call. Whatever you put inside them is what gets printed."
+              },
+              {
+                "code": "\"Hello, world!\"",
+                "text": "A string — text in double quotes. Single quotes work too: 'Hello, world!'."
+              }
+            ]
+          },
+          {
+            "type": "note",
+            "text": "Indentation is part of Python's syntax. This program has none, but inside conditions and loops it is required. Use 4 spaces rather than a tab."
+          }
+        ]
+      },
+      {
+        "id": "run",
+        "title": "4. How to run the program",
+        "blocks": [
+          {
+            "type": "steps",
+            "items": [
+              {
+                "title": "Open a terminal in the project folder",
+                "text": "In VS Code that is Terminal → New Terminal. Or open PowerShell and change into the folder with cd."
+              },
+              {
+                "title": "Run the file",
+                "text": "Run python hello.py. “Hello, world!” will appear on the screen."
+              },
+              {
+                "title": "Or press Run in the editor",
+                "text": "In VS Code with the Python extension, click the ▶ triangle in the top-right corner to run the current file."
+              }
+            ]
+          },
+          {
+            "type": "code",
+            "language": "bash",
+            "code": "cd C:\\projects\\hello\npython hello.py\n# Hello, world!"
+          }
+        ]
+      },
+      {
+        "id": "next",
+        "title": "5. What to learn next",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "First, solidify the basics: variables and data types, if/else conditions, for and while loops, functions, lists and dictionaries. Then move on to modules, files and venv virtual environments."
+          },
+          {
+            "type": "links",
+            "items": [
+              {
+                "title": "JavaScript — if the web is calling",
+                "text": "The second most popular language: frontend, Node.js and interactive interfaces.",
+                "href": "guide.html?lang=javascript"
+              },
+              {
+                "title": "SQL — working with data",
+                "text": "Database queries are useful in any project with analytics.",
+                "href": "guide.html?lang=sql"
+              },
+              {
+                "title": "C++ — if you need speed",
+                "text": "Understanding memory and performance after Python.",
+                "href": "guide.html?lang=cpp"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "javascript": {
+    "sections": [
+      {
+        "id": "what",
+        "title": "1. What this language is and what it is for",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "JavaScript is a programming language that runs right in the browser. It makes pages interactive: it handles clicks, validates forms, loads data and updates the interface without a reload."
+          },
+          {
+            "type": "list",
+            "items": [
+              "Frontend — React, Vue, Angular, Svelte.",
+              "Backend — Node.js, Express, NestJS.",
+              "Mobile apps — React Native and Capacitor.",
+              "Games and graphics — Canvas API, WebGL, Three.js."
+            ]
+          },
+          {
+            "type": "p",
+            "text": "Modern JavaScript (ES2015+) means let and const, arrow functions, promises and async/await. It is better to start with it than with old tutorials full of var."
+          }
+        ]
+      },
+      {
+        "id": "install",
+        "title": "2. Installing and setting up the environment",
+        "blocks": [
+          {
+            "type": "steps",
+            "items": [
+              {
+                "title": "Nothing to install for the browser",
+                "text": "Open any page, press F12 and switch to the Console tab — JavaScript is already running. This is the fastest way to try the language."
+              },
+              {
+                "title": "Install Node.js",
+                "text": "Download the LTS version from nodejs.org. Node.js is needed to run JavaScript outside the browser and install packages with npm."
+              },
+              {
+                "title": "Verify the installation",
+                "text": "In a new terminal run node --version and npm --version. Both commands should print a version number."
+              },
+              {
+                "title": "Install VS Code",
+                "text": "For convenience, add the ESLint and Prettier extensions — they highlight errors and format your code."
+              }
+            ]
+          },
+          {
+            "type": "code",
+            "language": "bash",
+            "code": "node --version\nnpm --version"
+          }
+        ]
+      },
+      {
+        "id": "hello",
+        "title": "3. Your first program: Hello, world!",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Create a file hello.js and add this line:"
+          },
+          {
+            "type": "code",
+            "language": "javascript",
+            "code": "// hello.js\nconsole.log(\"Hello, world!\");"
+          },
+          {
+            "type": "p",
+            "text": "Let's break the program down:"
+          },
+          {
+            "type": "lines",
+            "items": [
+              {
+                "code": "// hello.js",
+                "text": "A comment until the end of the line. The browser and Node.js do not execute it."
+              },
+              {
+                "code": "console",
+                "text": "The global console object. In the browser it is connected to the DevTools panel, in Node.js to the terminal."
+              },
+              {
+                "code": ".log(...)",
+                "text": "The log method prints the value passed to it. The dot means accessing a property of an object."
+              },
+              {
+                "code": "\"Hello, world!\"",
+                "text": "A string literal. You can use double quotes, single quotes or backticks."
+              },
+              {
+                "code": ";",
+                "text": "A semicolon ends the statement. JavaScript can insert it automatically, but writing it explicitly is safer."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "run",
+        "title": "4. How to run the program",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "There are two equally valid ways: in the terminal via Node.js or in the browser console."
+          },
+          {
+            "type": "steps",
+            "items": [
+              {
+                "title": "Via Node.js",
+                "text": "Open a terminal in the folder with the file and run node hello.js."
+              },
+              {
+                "title": "Via the browser",
+                "text": "Connect the file to HTML with <script src=\"hello.js\"></script> and open the page. Look at the result in the Console tab (F12)."
+              },
+              {
+                "title": "Via DevTools",
+                "text": "You can paste console.log(\"Hello, world!\") directly into the console and press Enter."
+              }
+            ]
+          },
+          {
+            "type": "code",
+            "language": "bash",
+            "code": "node hello.js\n# Hello, world!"
+          }
+        ]
+      },
+      {
+        "id": "next",
+        "title": "5. What to learn next",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Basics: let/const variables, data types, conditions, loops, functions, arrays and objects. Then DOM, events, fetch and asynchrony. After that, choose React or Node.js."
+          },
+          {
+            "type": "links",
+            "items": [
+              {
+                "title": "TypeScript — JavaScript with types",
+                "text": "The next step for large projects and teamwork.",
+                "href": "guide.html?lang=typescript"
+              },
+              {
+                "title": "HTML/CSS — you can't build a page without them",
+                "text": "The structure and styling of the interface that JavaScript brings to life.",
+                "href": "guide.html?lang=html-css"
+              },
+              {
+                "title": "Python — for backend and data",
+                "text": "A popular alternative to Node.js on the server.",
+                "href": "guide.html?lang=python"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "cpp": {
+    "sections": [
+      {
+        "id": "what",
+        "title": "1. What this language is and what it is for",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "C++ is a compiled language with manual memory management. A program is turned into machine code and runs very fast, which is why C++ is chosen where performance and control over resources matter."
+          },
+          {
+            "type": "list",
+            "items": [
+              "Game engines — Unreal Engine, custom engines and physics.",
+              "Systems programming — drivers, utilities, embedded devices.",
+              "Graphics and computing — CAD, rendering, signal processing.",
+              "High-frequency trading and financial systems."
+            ]
+          },
+          {
+            "type": "p",
+            "text": "C++ is harder than Python: you need to understand types, pointers, references and object lifetimes. In return, that knowledge makes you stronger in any other language."
+          }
+        ]
+      },
+      {
+        "id": "install",
+        "title": "2. Installing and setting up the environment",
+        "blocks": [
+          {
+            "type": "steps",
+            "items": [
+              {
+                "title": "Install a compiler",
+                "text": "On Windows, MSYS2 is the easiest option: download it from msys2.org, run pacman -S mingw-w64-ucrt-x86_64-gcc and add the bin folder to PATH. Alternatively, use Visual Studio Community with the “Desktop development with C++” workload."
+              },
+              {
+                "title": "Verify the compiler",
+                "text": "Open a new terminal and run g++ --version. The GCC version should be displayed."
+              },
+              {
+                "title": "Install VS Code",
+                "text": "Add the C/C++ extension by Microsoft and Code Runner. For debugging, an extension that configures launch.json is useful."
+              }
+            ]
+          },
+          {
+            "type": "code",
+            "language": "bash",
+            "code": "g++ --version\n# g++ (GCC) 14.2.0"
+          },
+          {
+            "type": "note",
+            "text": "If g++ is not found, check that the compiler's bin folder is added to the PATH environment variable and restart the terminal."
+          }
+        ]
+      },
+      {
+        "id": "hello",
+        "title": "3. Your first program: Hello, world!",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Create a file hello.cpp and copy this code into it:"
+          },
+          {
+            "type": "code",
+            "language": "cpp",
+            "code": "#include <iostream>\n\nint main() {\n    std::cout << \"Hello, world!\" << std::endl;\n    return 0;\n}"
+          },
+          {
+            "type": "p",
+            "text": "Let's go through each line:"
+          },
+          {
+            "type": "lines",
+            "items": [
+              {
+                "code": "#include <iostream>",
+                "text": "Includes the standard input/output library. This is where std::cout is declared."
+              },
+              {
+                "code": "int main() {",
+                "text": "The program's entry point. The main function returns an integer (int) and takes no arguments. Execution starts here."
+              },
+              {
+                "code": "std::cout << \"Hello, world!\" << std::endl;",
+                "text": "std::cout is the output stream to the screen. The << operator sends the string to it, and std::endl adds a newline and flushes the buffer."
+              },
+              {
+                "code": "return 0;",
+                "text": "Returns 0 — the success code. The operating system understands that the program finished without errors."
+              },
+              {
+                "code": "}",
+                "text": "Closes the body of main. Every opening curly brace must have a closing one."
+              }
+            ]
+          },
+          {
+            "type": "note",
+            "text": "In C++, semicolons are required at the end of statements. They are not used after #include or after a block in curly braces."
+          }
+        ]
+      },
+      {
+        "id": "run",
+        "title": "4. How to run the program",
+        "blocks": [
+          {
+            "type": "steps",
+            "items": [
+              {
+                "title": "Compile the program",
+                "text": "In a terminal in the folder with the file, run g++ hello.cpp -o hello.exe. The -o flag sets the name of the resulting file."
+              },
+              {
+                "title": "Run it",
+                "text": "On Windows run .\\hello.exe, on Linux and macOS run ./hello."
+              },
+              {
+                "title": "Or use VS Code",
+                "text": "Press F5 or the Run button. VS Code will call the compiler itself if the C/C++ extension is installed."
+              }
+            ]
+          },
+          {
+            "type": "code",
+            "language": "bash",
+            "code": "g++ hello.cpp -o hello.exe\n.\\hello.exe\n# Hello, world!"
+          }
+        ]
+      },
+      {
+        "id": "next",
+        "title": "5. What to learn next",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Basics: data types and variables, conditions, loops, functions, arrays and strings. Then move on to pointers and references, structs, classes and the STL standard library (vector, string, map)."
+          },
+          {
+            "type": "links",
+            "items": [
+              {
+                "title": "C — the foundation of systems programming",
+                "text": "No classes or STL, but as close to the hardware as it gets.",
+                "href": "guide.html?lang=c"
+              },
+              {
+                "title": "Rust — a safe alternative to C++",
+                "text": "The same speed, but the compiler checks memory usage.",
+                "href": "guide.html?lang=rust"
+              },
+              {
+                "title": "C# — games in Unity",
+                "text": "An easier path into gamedev if C++ feels too hard for now.",
+                "href": "guide.html?lang=csharp"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "java": {
+    "sections": [
+      {
+        "id": "what",
+        "title": "1. What this language is and what it is for",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Java is a strongly typed object-oriented language. Code is compiled to bytecode and runs on the JVM, so one program works on Windows, Linux and macOS without being rewritten."
+          },
+          {
+            "type": "list",
+            "items": [
+              "Enterprise backend — Spring Boot, microservices, banking systems.",
+              "Android — classic apps (Kotlin is the modern alternative).",
+              "Big data — Hadoop, Spark, Kafka.",
+              "Desktop and server applications with reliable typing."
+            ]
+          },
+          {
+            "type": "p",
+            "text": "Java is more verbose than Python, but its strictness helps in large teams: errors are caught at compile time, and the library ecosystem is enormous."
+          }
+        ]
+      },
+      {
+        "id": "install",
+        "title": "2. Installing and setting up the environment",
+        "blocks": [
+          {
+            "type": "steps",
+            "items": [
+              {
+                "title": "Install the JDK",
+                "text": "Download JDK 21 (LTS) from adoptium.net. It includes not only the runtime but also the javac compiler."
+              },
+              {
+                "title": "Verify the installation",
+                "text": "In a new terminal run java -version and javac -version. The versions should match."
+              },
+              {
+                "title": "Configure JAVA_HOME",
+                "text": "Some tools look for the JAVA_HOME variable. Set it to the path of the JDK folder, for example C:\\Program Files\\Eclipse Adoptium\\jdk-21."
+              },
+              {
+                "title": "Install an IDE",
+                "text": "IntelliJ IDEA Community Edition is the most convenient free option. VS Code with the Extension Pack for Java also works."
+              }
+            ]
+          },
+          {
+            "type": "code",
+            "language": "bash",
+            "code": "java -version\njavac -version"
+          }
+        ]
+      },
+      {
+        "id": "hello",
+        "title": "3. Your first program: Hello, world!",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Create a file Hello.java. The file name must match the public class name and is case-sensitive."
+          },
+          {
+            "type": "code",
+            "language": "java",
+            "code": "public class Hello {\n    public static void main(String[] args) {\n        System.out.println(\"Hello, world!\");\n    }\n}"
+          },
+          {
+            "type": "p",
+            "text": "Let's go through each line:"
+          },
+          {
+            "type": "lines",
+            "items": [
+              {
+                "code": "public class Hello {",
+                "text": "Declares the public class Hello. In Java all code lives inside classes, and the file name must match the class name."
+              },
+              {
+                "code": "public static void main(String[] args) {",
+                "text": "The main method is the entry point. public makes it accessible from outside, static allows calling it without creating an object, void means it returns nothing, and String[] args is the array of command-line arguments."
+              },
+              {
+                "code": "System.out.println(\"Hello, world!\");",
+                "text": "System.out is the standard output stream. println prints the string and moves the cursor to a new line."
+              },
+              {
+                "code": "}",
+                "text": "The closing braces end the main method and the Hello class. Keep your braces balanced."
+              }
+            ]
+          },
+          {
+            "type": "note",
+            "text": "If you name the file hello.java in lowercase, the compiler will report: class Hello is public, should be declared in a file named Hello.java."
+          }
+        ]
+      },
+      {
+        "id": "run",
+        "title": "4. How to run the program",
+        "blocks": [
+          {
+            "type": "steps",
+            "items": [
+              {
+                "title": "Compile",
+                "text": "Run javac Hello.java. A Hello.class file with bytecode will appear next to it."
+              },
+              {
+                "title": "Run",
+                "text": "Run java Hello — without the .class extension. “Hello, world!” will appear on the screen."
+              },
+              {
+                "title": "Or run it in the IDE",
+                "text": "In IntelliJ IDEA, click the green triangle next to the main method."
+              }
+            ]
+          },
+          {
+            "type": "code",
+            "language": "bash",
+            "code": "javac Hello.java\njava Hello\n# Hello, world!"
+          }
+        ]
+      },
+      {
+        "id": "next",
+        "title": "5. What to learn next",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Basics: data types, conditions, loops, methods, arrays. Then classes, inheritance, interfaces, collections (List, Map, Set) and exception handling. After that you can dive into Spring Boot or Android."
+          },
+          {
+            "type": "links",
+            "items": [
+              {
+                "title": "Kotlin — a modern language for Android",
+                "text": "Compatible with Java, but shorter and safer.",
+                "href": "guide.html?lang=kotlin"
+              },
+              {
+                "title": "C# — a similar path into .NET and Unity",
+                "text": "Familiar OOP concepts in another ecosystem.",
+                "href": "guide.html?lang=csharp"
+              },
+              {
+                "title": "SQL — data for the backend",
+                "text": "Java services almost always work with a database.",
+                "href": "guide.html?lang=sql"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "csharp": {
+    "sections": [
+      {
+        "id": "what",
+        "title": "1. What this language is and what it is for",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "C# is a modern object-oriented language from Microsoft for the .NET platform. It is strict yet convenient: automatic garbage collection, a rich standard library and excellent IDE support."
+          },
+          {
+            "type": "list",
+            "items": [
+              "Games — Unity, where C# is the main scripting language.",
+              "Web — ASP.NET Core, Blazor, Web API.",
+              "Desktop apps — WPF, WinUI, MAUI.",
+              "Cross-platform services and cloud solutions on .NET."
+            ]
+          },
+          {
+            "type": "p",
+            "text": "Modern .NET 8 runs on Windows, Linux and macOS. C# is similar to Java but adds properties, LINQ, async/await and more convenient syntax."
+          }
+        ]
+      },
+      {
+        "id": "install",
+        "title": "2. Installing and setting up the environment",
+        "blocks": [
+          {
+            "type": "steps",
+            "items": [
+              {
+                "title": "Install the .NET SDK",
+                "text": "Download the .NET 8 SDK from dotnet.microsoft.com/download. The SDK includes the compiler and project templates."
+              },
+              {
+                "title": "Verify the installation",
+                "text": "In a new terminal run dotnet --version. The command should print a version, for example 8.0.400."
+              },
+              {
+                "title": "Install an editor",
+                "text": "VS Code with the C# Dev Kit extension is a lightweight option. Visual Studio 2022 Community is more powerful, with a debugger and UI designer."
+              }
+            ]
+          },
+          {
+            "type": "code",
+            "language": "bash",
+            "code": "dotnet --version\n# 8.0.400"
+          }
+        ]
+      },
+      {
+        "id": "hello",
+        "title": "3. Your first program: Hello, world!",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "The classic C# program structure looks like this:"
+          },
+          {
+            "type": "code",
+            "language": "csharp",
+            "code": "using System;\n\nclass Program\n{\n    static void Main()\n    {\n        Console.WriteLine(\"Hello, world!\");\n    }\n}"
+          },
+          {
+            "type": "p",
+            "text": "Let's go through each line:"
+          },
+          {
+            "type": "lines",
+            "items": [
+              {
+                "code": "using System;",
+                "text": "Imports the System namespace, where the Console class lives. Without it you would have to write System.Console."
+              },
+              {
+                "code": "class Program",
+                "text": "Declares the Program class — a container for code. In C#, code cannot exist outside a class."
+              },
+              {
+                "code": "static void Main()",
+                "text": "The program's entry point. static allows calling the method without creating a Program object, void means the method returns nothing."
+              },
+              {
+                "code": "Console.WriteLine(\"Hello, world!\");",
+                "text": "Console is the class for working with the console. WriteLine prints a string and adds a newline."
+              },
+              {
+                "code": "{ }",
+                "text": "Curly braces define the body of the class and the method. They must come in pairs."
+              }
+            ]
+          },
+          {
+            "type": "note",
+            "text": "In newer .NET versions you can write it shorter: Console.WriteLine(\"Hello, world!\"); without a class or Main — the compiler creates the entry point itself. But it is useful to understand the classic structure."
+          }
+        ]
+      },
+      {
+        "id": "run",
+        "title": "4. How to run the program",
+        "blocks": [
+          {
+            "type": "steps",
+            "items": [
+              {
+                "title": "Create a project",
+                "text": "Run dotnet new console -n Hello and change into the folder: cd Hello."
+              },
+              {
+                "title": "Replace the code",
+                "text": "Open Program.cs and paste the code from the section above."
+              },
+              {
+                "title": "Run",
+                "text": "Run dotnet run. “Hello, world!” will appear on the screen."
+              },
+              {
+                "title": "Or press F5",
+                "text": "In Visual Studio or VS Code with the C# Dev Kit, you can launch the project with the debugger."
+              }
+            ]
+          },
+          {
+            "type": "code",
+            "language": "bash",
+            "code": "dotnet new console -n Hello\ncd Hello\ndotnet run\n# Hello, world!"
+          }
+        ]
+      },
+      {
+        "id": "next",
+        "title": "5. What to learn next",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Basics: data types, conditions, loops, methods, arrays and lists. Then classes, properties, interfaces, inheritance, LINQ and async/await. For games, learn Unity in parallel; for web, ASP.NET Core."
+          },
+          {
+            "type": "links",
+            "items": [
+              {
+                "title": "Java — a kindred language",
+                "text": "A similar object model, but a different ecosystem.",
+                "href": "guide.html?lang=java"
+              },
+              {
+                "title": "C++ — if you need full control",
+                "text": "Understanding memory helps in gamedev and systems code.",
+                "href": "guide.html?lang=cpp"
+              },
+              {
+                "title": "TypeScript — web frontend",
+                "text": "Useful if you want to build a web interface for your C# backend.",
+                "href": "guide.html?lang=typescript"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

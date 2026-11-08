@@ -19,6 +19,11 @@
     return "dark";
   }
 
+  function tr(key, fallback) {
+    var i18n = window.MYSIDE_I18N;
+    return i18n && i18n.t ? i18n.t(key) : fallback;
+  }
+
   function applyTheme(theme) {
     root.setAttribute("data-theme", theme);
 
@@ -33,9 +38,16 @@
       button.textContent = nextIsLight ? "☀️" : "🌙";
       button.setAttribute(
         "aria-label",
-        nextIsLight ? "Включить светлую тему" : "Включить тёмную тему"
+        nextIsLight
+          ? tr("theme.toLight", "Включить светлую тему")
+          : tr("theme.toDark", "Включить тёмную тему")
       );
-      button.setAttribute("title", nextIsLight ? "Светлая тема" : "Тёмная тема");
+      button.setAttribute(
+        "title",
+        nextIsLight
+          ? tr("theme.lightTitle", "Светлая тема")
+          : tr("theme.darkTitle", "Тёмная тема")
+      );
       button.setAttribute("aria-pressed", theme === "light" ? "true" : "false");
     });
   }

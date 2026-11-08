@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ru" data-title-key="register.title">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -9,6 +9,7 @@
   <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
   <link rel="stylesheet" href="css/style.css">
   <script src="js/theme.js"></script>
+  <script src="js/i18n.js"></script>
   <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </head>
 <body>
@@ -18,49 +19,54 @@
         <span class="brand-mark" aria-hidden="true">◈</span>
         <span class="brand-name">My<span class="brand-accent">-side</span></span>
       </a>
-      <nav class="nav" id="site-nav" aria-label="Основная навигация">
-        <a href="index.html">Каталог</a>
+      <nav class="nav" id="site-nav" aria-label="Основная навигация" data-i18n-aria="nav.aria">
+        <a href="index.html" data-i18n="nav.catalog">Каталог</a>
       </nav>
       <div class="header-actions">
+        <div class="lang-switch" data-lang-switch role="group" aria-label="Язык сайта" data-i18n-aria="lang.aria">
+          <button type="button" class="lang-btn" data-lang="ru" aria-pressed="false">RU</button>
+          <button type="button" class="lang-btn" data-lang="en" aria-pressed="false">EN</button>
+        </div>
         <button type="button" class="theme-toggle" data-theme-toggle aria-label="Переключить тему" aria-pressed="false">☀️</button>
         <div class="auth-area" data-auth-area></div>
-        <button type="button" class="nav-toggle" data-nav-toggle aria-label="Открыть меню" aria-expanded="false" aria-controls="site-nav">☰</button>
+        <button type="button" class="nav-toggle" data-nav-toggle aria-label="Открыть меню" data-i18n-aria="nav.openMenu" aria-expanded="false" aria-controls="site-nav">☰</button>
       </div>
     </div>
   </header>
 
   <main class="auth-page">
     <div class="auth-card">
-      <h1>Регистрация</h1>
-      <p class="subtitle">Создайте аккаунт — это займёт меньше минуты.</p>
+      <h1 data-i18n="register.h1">Регистрация</h1>
+      <p class="subtitle" data-i18n="register.subtitle">Создайте аккаунт — это займёт меньше минуты.</p>
 
       <p class="notice" id="already-notice" hidden>
-        Вы уже вошли как <strong id="already-name">—</strong>.
-        Новая регистрация заменит текущий вход.
+        <span data-i18n="register.alreadyPrefix">Вы уже вошли как</span>
+        <strong id="already-name">—</strong>.
+        <span data-i18n="register.alreadySuffix">Новая регистрация заменит текущий вход.</span>
       </p>
 
       <form id="register-form" novalidate>
         <div class="field">
-          <label for="login">Логин</label>
+          <label for="login" data-i18n="register.login">Логин</label>
           <input id="login" name="login" type="text" autocomplete="username"
-                 placeholder="например, player_one">
+                 placeholder="например, player_one" data-i18n-placeholder="register.loginPlaceholder">
           <span class="field-error" id="login-error"></span>
         </div>
 
         <div class="field">
-          <label for="email">Email</label>
+          <label for="email" data-i18n="register.email">Email</label>
           <input id="email" name="email" type="email" autocomplete="email"
-                 placeholder="you@example.com">
+                 placeholder="you@example.com" data-i18n-placeholder="register.emailPlaceholder">
           <span class="field-error" id="email-error"></span>
         </div>
 
         <div class="field">
-          <label for="password">Пароль</label>
+          <label for="password" data-i18n="register.password">Пароль</label>
           <div class="password-wrap">
             <input id="password" name="password" type="password" autocomplete="new-password"
-                   placeholder="Минимум 6 символов">
+                   placeholder="Минимум 6 символов" data-i18n-placeholder="register.passwordPlaceholder">
             <button type="button" class="password-toggle" id="password-toggle"
-                    aria-label="Показать пароль" aria-pressed="false">Показать</button>
+                    aria-label="Показать пароль" data-i18n-aria="login.showAria" aria-pressed="false" data-i18n="login.show">Показать</button>
           </div>
           <span class="field-error" id="password-error"></span>
         </div>
@@ -72,16 +78,16 @@
 
         <p class="form-message" id="form-message" role="alert" aria-live="assertive"></p>
 
-        <button type="submit" class="btn btn-primary btn-block" id="register-submit">Зарегистрироваться</button>
+        <button type="submit" class="btn btn-primary btn-block" id="register-submit" data-i18n="register.submit">Зарегистрироваться</button>
       </form>
 
-      <p class="auth-switch">Уже есть аккаунт? <a href="login.html">Войти</a></p>
-      <p class="hint">Демо без сервера: логин, email и хеш пароля сохраняются только в этом браузере.</p>
+      <p class="auth-switch"><span data-i18n="register.haveAccount">Уже есть аккаунт?</span> <a href="login.html" data-i18n="register.loginLink">Войти</a></p>
+      <p class="hint" data-i18n="register.hint">Демо без сервера: логин, email и хеш пароля сохраняются только в этом браузере.</p>
     </div>
   </main>
 
   <footer class="site-footer">
-    <p>My-side · демо без сервера · данные хранятся в localStorage</p>
+    <p data-i18n="footer.demo">My-side · демо без сервера · данные хранятся в localStorage</p>
   </footer>
 
   <script src="js/app.js"></script>

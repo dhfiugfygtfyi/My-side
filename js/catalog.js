@@ -1,23 +1,14 @@
 /* ============================================================
    My-side — каталог языков.
-   Данные берутся из data/languages.json: чтобы добавить новый язык,
+   Данные берутся из data/languages.json (RU) или
+   data/languages.en.json (EN): чтобы добавить новый язык,
    достаточно дописать объект в JSON, вёрстку менять не нужно.
    ============================================================ */
 (function () {
   "use strict";
 
-  var PURPOSE_LABELS = {
-    web: "Веб",
-    games: "Игры",
-    mobile: "Мобильные приложения",
-    data: "Анализ данных"
-  };
-
-  var SORT_LABELS = {
-    popular: "По популярности",
-    alphabet: "По алфавиту",
-    year: "По году появления"
-  };
+  var PURPOSE_KEYS = ["web", "games", "mobile", "data"];
+  var SORT_KEYS = ["popular", "alphabet", "year"];
 
   var state = {
     languages: [],
@@ -27,6 +18,25 @@
   };
 
   var els = {};
+
+  function i18n() {
+    return window.MYSIDE_I18N || null;
+  }
+
+  function tr(key, vars) {
+    var api = i18n();
+    return api && api.t ? api.t(key, vars) : key;
+  }
+
+  function lang() {
+    var api = i18n();
+    return api && api.lang ? api.lang : "ru";
+  }
+
+  function langLink(url) {
+    var api = i18n();
+    return api && api.link ? api.link(url) : url;
+  }
 
   function escapeHtml(value) {
     return String(value == null ? "" : value)
@@ -42,7 +52,7 @@
   }
 
   function purposeLabel(key) {
-    return PURPOSE_LABELS[key] || key;
+    return PURPOSE_KEYS.indexOf(key) === -1 ? key : tr("purpose." + key);
   }
 
   function readUrlState() {
@@ -52,8 +62,10 @@
     var sort = params.get("sort");
 
     if (q) state.query = q;
-    if (purpose && (purpose === "all" || PURPOSE_LABELS[purpose])) state.purpose = purpose;
-    if (sort && SORT_LABELS[sort]) state.sort = sort;
+    if (purpose && (purpose === "all" || PURPOSE_KEYS.indexOf(purpose) !== -1)) {
+      state.purpose = purpose;
+    }
+    if (sort && SORT_KEYS.indexOf(sort) !== -1) state.sort = sort;
   }
 
   function writeUrlState() {
@@ -63,6 +75,7 @@
     if (state.query) params.set("q", state.query);
     if (state.purpose !== "all") params.set("purpose", state.purpose);
     if (state.sort !== "popular") params.set("sort", state.sort);
+    if (lang() === "en") params.set("hl", "en");
 
     var query = params.toString();
     var url = window.location.pathname + (query ? "?" + query : "");
@@ -101,7 +114,7 @@
 
     list.sort(function (a, b) {
       if (state.sort === "alphabet") {
-        return String(a.name).localeCompare(String(b.name), "ru");
+        return String(a.name).localeCompare(String(b.name), lang() === "en" ? "en" : "ru");
       }
       if (state.sort === "year") {
         return (b.year || 0) - (a.year || 0);
@@ -118,12 +131,12 @@
     });
 
     if (language.full === false) {
-      purposes.push('<span class="badge badge--wip">Гайд в разработке</span>');
+      purposes.push('<span class="badge badge--wip">' + escapeHtml(tr("card.wip")) + "</span>");
     }
 
-    var href = "pages/guide.html?lang=" + encodeURIComponent(language.slug);
+    var href = langLink("pages/guide.html?lang=" + encodeURIComponent(language.slug));
     var meta = [];
-    if (language.year) meta.push("с " + language.year);
+    if (language.year) meta.push(tr("card.since", { year: language.year }));
     if (language.difficulty) meta.push(language.difficulty);
 
     return (
@@ -139,8 +152,8 @@
         "<p>" + escapeHtml(language.tagline) + "</p>" +
         '<div class="badges">' + purposes.join("") + "</div>" +
         '<div class="lang-card__footer">' +
-          "<span>Популярность " + escapeHtml(language.popularity || "—") + "</span>" +
-          '<span class="go">Открыть гайд →</span>' +
+          "<span>" + escapeHtml(tr("card.popularity", { value: language.popularity || "—" })) + "</span>" +
+          '<span class="go">' + escapeHtml(tr("card.open")) + "</span>" +
         "</div>" +
       "</a>"
     );
@@ -170,8 +183,7 @@
     if (els.count) {
       var total = state.languages.length;
       var found = visible.length;
-      els.count.innerHTML =
-        "Найдено <strong>" + found + "</strong> из <strong>" + total + "</strong> языков";
+      els.count.innerHTML = tr("index.count", { found: found, total: total });
     }
 
     if (els.clear) {
@@ -253,13 +265,16 @@
   }
 
   function load() {
-    return fetch("data/languages.json", { cache: "no-cache" })
+    var api = i18n();
+    var path = api && api.dataFile ? api.dataFile("data/languages") : "data/languages.json";
+
+    return fetch(path, { cache: "no-cache" })
       .then(function (response) {
         if (!response.ok) throw new Error("HTTP " + response.status);
         return response.json();
       })
       .then(function (data) {
-        if (!Array.isArray(data)) throw new Error("Ожидался массив языков");
+        if (!Array.isArray(data)) throw new Error("Expected an array of languages");
         state.languages = data;
       });
   }
@@ -269,13 +284,11 @@
     if (els.empty) {
       els.empty.hidden = false;
       els.empty.innerHTML =
-        "<h2>Не удалось загрузить каталог</h2>" +
-        "<p>Проверьте, что файл <code>data/languages.json</code> доступен. " +
-        "Если вы открыли сайт напрямую через <code>file://</code>, запустите локальный сервер " +
-        "или откройте сайт на GitHub Pages.</p>" +
+        "<h2>" + escapeHtml(tr("index.errorTitle")) + "</h2>" +
+        "<p>" + tr("index.errorText") + "</p>" +
         "<p class=\"muted\">" + escapeHtml(error && error.message ? error.message : "") + "</p>";
     }
-    if (els.count) els.count.textContent = "Данные недоступны";
+    if (els.count) els.count.textContent = tr("index.dataUnavailable");
   }
 
   function boot() {
