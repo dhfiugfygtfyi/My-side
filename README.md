@@ -12,6 +12,8 @@ login.html          вход (логин или email + пароль + Turnstile
 register.html       регистрация (логин, email, пароль + Turnstile)
 pages/
   guide.html        страница гайда: pages/guide.html?lang=python
+  install-python.html  как установить Python (Windows, macOS, Linux)
+  install-linux.html   установка языков программирования на Linux
 css/
   style.css         тёмная/светлая темы, каталог, гайды, авторизация
 js/
@@ -20,6 +22,7 @@ js/
   app.js            регистрация, вход, сессия, шапка (не менялось по логике)
   catalog.js        поиск, фильтры, сортировка, карточки языков
   guide.js          рендер гайда по ?lang=..., подсветка и копирование кода
+  install.js        страницы установки: копирование команд и подсветка
 data/
   languages.json    список языков и их характеристики (RU)
   languages.en.json то же на английском (EN)
@@ -40,6 +43,20 @@ favicon* / app.ico  иконки (не изменялись)
 - Данные каталога и гайдов: `data/languages.json` / `data/languages.en.json`
   и `data/guides.json` / `data/guides.en.json`.
 - Без параметра `hl` и без сохранённого выбора открывается русская версия.
+
+## Установка языков
+
+В шапке сайта есть две отдельные вкладки:
+
+- **Установка Python** (`pages/install-python.html`) — Windows, macOS и Linux:
+  PATH, pip, venv, первая программа и частые ошибки.
+- **Языки на Linux** (`pages/install-linux.html`) — команды для Ubuntu/Debian
+  (`apt`), Fedora (`dnf`) и Arch Linux (`pacman`): Python, Node.js, C/C++,
+  Java, C#, Go, Rust, PHP, Ruby, Kotlin, Lua и Perl.
+
+Обе страницы двуязычные: русский и английский текст лежат в блоках
+`data-lang-block="ru"` и `data-lang-block="en"`, видимость переключается
+атрибутом `data-lang` на `<html>`.
 
 ## Каталог
 

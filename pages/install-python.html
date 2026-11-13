@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="ru" data-lang="ru" data-theme="dark" data-base="../" data-title-key="installPython.title">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Как установить Python — My-side</title>
+  <meta name="description" content="Пошаговая инструкция по установке Python на Windows, macOS и Linux: PATH, pip, виртуальное окружение и решение частых проблем." data-i18n-content="installPython.description">
+  <link rel="icon" href="../favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16.png">
+  <link rel="stylesheet" href="../css/style.css?v=3">
+  <link rel="stylesheet" id="hljs-dark" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+  <link rel="stylesheet" id="hljs-light" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css" disabled>
+  <script src="../js/theme.js"></script>
+  <script src="../js/i18n.js?v=3"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a class="brand" href="../index.html">
+        <span class="brand-mark" aria-hidden="true">◈</span>
+        <span class="brand-name">My<span class="brand-accent">-side</span></span>
+      </a>
+      <nav class="nav" id="site-nav" aria-label="Основная навигация" data-i18n-aria="nav.aria">
+        <a href="../index.html" data-i18n="nav.catalog">Каталог</a>
+        <a class="is-active" href="install-python.html" aria-current="page" data-i18n="nav.installPython">Установка Python</a>
+        <a href="install-linux.html" data-i18n="nav.installLinux">Языки на Linux</a>
+      </nav>
+      <div class="header-actions">
+        <button type="button" class="theme-toggle" data-theme-toggle aria-label="Переключить тему" aria-pressed="false">☀️</button>
+        <div class="lang-switch" data-lang-switch role="group" aria-label="Язык сайта" data-i18n-aria="lang.aria">
+          <button type="button" class="lang-btn" data-lang="en" aria-pressed="false" title="English">En</button>
+          <button type="button" class="lang-btn" data-lang="ru" aria-pressed="false" title="Русский">Ru</button>
+        </div>
+        <div class="auth-area" data-auth-area></div>
+        <button type="button" class="nav-toggle" data-nav-toggle aria-label="Открыть меню" data-i18n-aria="nav.openMenu" aria-expanded="false" aria-controls="site-nav">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="guide-page">
+    <nav class="breadcrumbs" aria-label="Хлебные крошки" data-i18n-aria="guide.breadcrumbsAria">
+      <a href="../index.html" data-i18n="guide.catalog">Каталог языков</a>
+      <span class="sep">/</span>
+      <span data-i18n="installPython.crumb">Установка Python</span>
+    </nav>
+
+    <section class="guide-hero">
+      <div class="guide-hero__icon" aria-hidden="true">🐍</div>
+      <div data-lang-block="ru">
+        <h1>Как установить Python</h1>
+        <p class="tagline">Пошаговая инструкция для Windows, macOS и Linux: где скачать, как включить PATH, проверить версию и настроить виртуальное окружение.</p>
+        <div class="guide-meta">
+          <span class="stat-pill">Windows</span>
+          <span class="stat-pill">macOS</span>
+          <span class="stat-pill">Linux</span>
+          <span class="stat-pill">≈ 10 минут</span>
+        </div>
+      </div>
+      <div data-lang-block="en">
+        <h1>How to install Python</h1>
+        <p class="tagline">A step-by-step guide for Windows, macOS and Linux: where to download it, how to enable PATH, check the version and set up a virtual environment.</p>
+        <div class="guide-meta">
+          <span class="stat-pill">Windows</span>
+          <span class="stat-pill">macOS</span>
+          <span class="stat-pill">Linux</span>
+          <span class="stat-pill">≈ 10 minutes</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="guide-layout">
+      <div class="guide-content">
+        <div data-lang-block="ru">
+          <section class="guide-section" id="check">
+            <h2>1. Проверьте, установлен ли Python</h2>
+            <p>Откройте терминал: в Windows — PowerShell, в macOS и Linux — Terminal. Выполните команды:</p>
+            <div class="code-block">
+              <div class="code-block__bar">
+                <span class="code-block__lang">Терминал</span>
+                <button type="button" class="copy-btn" data-copy data-i18n="guide.copy">Копировать</button>
+              </div>
+              <pre><code class="language-bash">python3 --version
+python --version
+py --version</code></pre>
+            </div>
+            <p>Если в ответ появилось что-то вроде <code>Python 3.12.4</code>, Python уже установлен. Если команда не найдена — переходите к установке. В Windows основной лаунчер обычно называется <code>py</code>.</p>
+          </section>
+
+          <section class="guide-section" id="windows">
+            <h2>2. Установка на Windows</h2>
+            <ol class="steps">
+              <li>
+                <h3>Скачайте установщик</h3>
+                <p>Откройте <a href="https://www.python.org/downloads/" target="_blank" rel="noopener">python.org/downloads</a> и нажмите кнопку загрузки последней версии Python 3.</p>
+              </li>
+              <li>
+                <h3>Включите PATH</h3>
+                <p>На первом экране установщика обязательно поставьте галочку <strong>Add python.exe to PATH</strong>. Без неё команда <code>python</code> не будет работать в терминале.</p>
+              </li>
+              <li>
+                <h3>Установите</h3>
+                <p>Нажмите <strong>Install Now</strong> и дождитесь завершения. Права администратора нужны только при установке «для всех пользователей».</p>
+              </li>
+              <li>
+                <h3>Проверьте</h3>
+                <p>Закройте PowerShell и откройте заново, затем выполните <code>py --version</code>.</p>
+              </li>
+            </ol>
+            <div class="callout">Можно поставить Python через winget: <code>winget install --id Python.Python.3.12 -e</code>. Подставьте актуальный номер версии. Не скачивайте установщики со сторонних сайтов.</div>
+          </section>
+
+          <section class="guide-section" id="macos">
+            <h2>3. Установка на macOS</h2>
+            <ol class="steps">
+              <li>
+                <h3>Проверьте версию</h3>
+                <p>В macOS часто уже есть Python 3. Выполните <code>python3 --version</code>. Если версия есть, отдельная установка не нужна.</p>
+              </li>
+              <li>
+                <h3>Установите через python.org или Homebrew</h3>
+                <p>Универсальный установщик лежит на <a href="https://www.python.org/downloads/macos/" target="_blank" rel="noopener">python.org/downloads/macos</a>. Если установлен Homebrew, проще так:</p>
+                <div class="code-block">
+                  <div class="code-block__bar">
+                    <span class="code-block__lang">Bash</span>
+                    <button type="button" class="copy-btn" data-copy data-i18n="guide.copy">Копировать</button>
+                  </div>
+                  <pre><code class="language-bash">brew install python</code></pre>
+                </div>
+              </li>
+              <li>
+                <h3>Проверьте pip</h3>
+                <p>Выполните <code>python3 --version</code> и <code>pip3 --version</code>. Команда <code>python</code> на macOS может отсутствовать или указывать на старую версию — используйте <code>python3</code>.</p>
+              </li>
+            </ol>
+          </section>
+
+          <section class="guide-section" id="linux">
+            <h2>4. Установка на Linux</h2>
+            <p>В большинстве дистрибутивов Python 3 уже установлен. Если его нет, используйте пакетный менеджер:</p>
+            <div class="code-block">
+              <div class="code-block__bar">
+                <span class="code-block__lang">Bash</span>
+                <button type="button" class="copy-btn" data-copy data-i18n="guide.copy">Копировать</button>
+              </div>
+              <pre><code class="language-bash"># Ubuntu / Debian
+sudo apt update
+sudo apt install python3 python3-pip python3-venv
+
+# Fedora
+sudo dnf install python3 python3-pip
+
+# Arch Linux
+sudo pacman -S python python-pip</code></pre>
+            </div>
+            <div class="callout">Не удаляйте системный Python — от него зависят служебные скрипты дистрибутива. Для своих проектов создавайте виртуальное окружение.</div>
+          </section>
+
+          <section class="guide-section" id="verify">
+            <h2>5. Проверка установки</h2>
+            <p>Убедитесь, что доступны сам Python, pip и модуль venv:</p>
+            <div class="code-block">
+              <div class="code-block__bar">
+                <span class="code-block__lang">Терминал</span>
+                <button type="button" class="copy-btn" data-copy data-i18n="guide.copy">Копировать</button>
+              </div>
+              <pre><code class="language-bash">python3 --version
+pip3 --version
+python3 -m venv --help</code></pre>
+            </div>
+            <p>Если pip не найден, включите его вручную: <code>python3 -m ensurepip --upgrade</code> в Linux и macOS или <code>py -m ensurepip --upgrade</code> в Windows.</p>
+          </section>
+
+          <section class="guide-section" id="venv">
+            <h2>6. Первая программа и виртуальное окружение</h2>
+            <p>Создайте папку проекта и окружение <code>.venv</code> — так зависимости проекта не смешаются с системными:</p>
+            <div class="code-block">
+              <div class="code-block__bar">
+                <span class="code-block__lang">Терминал</span>
+                <button type="button" class="copy-btn" data-copy data-i18n="guide.copy">Копировать</button>
+              </div>
+              <pre><code class="language-bash">mkdir myproject
+cd myproject
+python3 -m venv .venv</code></pre>
+            </div>
+            <p>Активируйте окружение:</p>
+            <div class="code-block">
+              <div class="code-block__bar">
+                <span class="code-block__lang">Терминал</span>
+                <button type="button" class="copy-btn" data-copy data-i18n="guide.copy">Копировать</button>
+              </div>
+              <pre><code class="language-bash"># Windows (PowerShell)
+.venv\Scripts\Activate.ps1
+
+# macOS / Linux
+source .venv/bin/activate</code></pre>
+            </div>
+            <p>Создайте файл <code>hello.py</code>:</p>
+            <div class="code-block">
+              <div class="code-block__bar">
+                <span class="code-block__lang">Python</span>
+                <button type="button" class="copy-btn" data-copy data-i18n="guide.copy">Копировать</button>
+              </div>
+              <pre><code class="language-python">print("Привет, Python!")</code></pre>
+            </div>
+            <p>Запустите его командой <code>python3 hello.py</code> (в Windows — <code>py hello.py</code>). В активированном окружении пакеты ставятся через <code>pip install requests</code>, а список зависимостей сохраняется командой <code>pip freeze &gt; requirements.txt</code>.</p>
+          </section>
+
+          <section class="guide-section" id="problems">
+            <h2>7. Частые проблемы</h2>
+            <ul>
+              <li><strong>Команда <code>python</code> не найдена, а <code>python3</code> работает.</strong> Используйте <code>python3</code> или настройте псевдоним в shell.</li>
+              <li><strong>Windows: забыта галочка PATH.</strong> Переустановите Python с галочкой <strong>Add python.exe to PATH</strong> или добавьте папку установки в переменную PATH вручную.</li>
+              <li><strong>Ошибка <code>externally-managed-environment</code>.</strong> В Ubuntu 23.04+ и Debian 12 нельзя ставить пакеты в системный Python. Создайте venv или используйте <code>pipx</code>.</li>
+              <li><strong>pip не найден.</strong> Выполните <code>python3 -m ensurepip --upgrade</code>.</li>
+              <li><strong>Несколько версий Python.</strong> В Windows <code>py -0</code> показывает список, а <code>py -3.12</code> запускает нужную версию.</li>
+              <li><strong>Permission denied при установке пакета.</strong> Не используйте <code>sudo pip</code> — работайте в виртуальном окружении.</li>
+            </ul>
+          </section>
+
+          <section class="guide-section" id="next">
+            <h2>8. Что дальше</h2>
+            <p>Когда Python установлен, переходите к практике: синтаксис, переменные, условия и первые проекты.</p>
+            <div class="link-cards">
+              <a class="link-card" href="guide.html?lang=python">
+                <strong>Гайд по Python</strong>
+                <span>Полный пошаговый разбор языка для начинающих.</span>
+                <span class="arrow">Открыть гайд →</span>
+              </a>
+              <a class="link-card" href="install-linux.html">
+                <strong>Языки на Linux</strong>
+                <span>Команды установки Python, Node.js, Go, Rust и других языков.</span>
+                <span class="arrow">Открыть →</span>
+              </a>
+            </div>
+          </section>
+        </div>
+
+        <div data-lang-block="en">
+          <section class="guide-section" id="check-en">
+            <h2>1. Check whether Python is already installed</h2>
+            <p>Open a terminal: PowerShell on Windows, Terminal on macOS and Linux. Run:</p>
+            <div class="code-block">
+              <div class="code-block__bar">
+                <span class="code-block__lang">Terminal</span>
+                <button type="button" class="copy-btn" data-copy data-i18n="guide.copy">Copy</button>
+              </div>
+              <pre><code class="language-bash">python3 --version
+python --version
+py --version</code></pre>
+            </div>
+            <p>If you see something like <code>Python 3.12.4</code>, Python is already installed. If the command is not found, continue with the installation. On Windows the launcher is usually called <code>py</code>.</p>
+          </section>
+
+          <section class="guide-section" id="windows-en">
+            <h2>2. Install on Windows</h2>
+            <ol class="steps">
+              <li>
+                <h3>Download the installer</h3>
+                <p>Open <a href="https://www.python.org/downloads/" target="_blank" rel="noopener">python.org/downloads</a> and click the download button for the latest Python 3 release.</p>
+              </li>
+              <li>
+                <h3>Enable PATH</h3>
+                <p>On the first installer screen, tick <strong>Add python.exe to PATH</strong>. Without it the <code>python</code> command will not work in the terminal.</p>
+              </li>
+              <li>
+                <h3>Install</h3>
+                <p>Click <strong>Install Now</strong> and wait for it to finish. Administrator rights are only needed for an all-users installation.</p>
+              </li>
+              <li>
+                <h3>Verify</h3>
+                <p>Close PowerShell, open it again and run <code>py --version</code>.</p>
+              </li>
+            </ol>
+            <div class="callout">You can also install Python with winget: <code>winget install --id Python.Python.3.12 -e</code>. Use the current version number. Avoid installers from third-party sites.</div>
+          </section>
+
+          <section class="guide-section" id="macos-en">
+            <h2>3. Install on macOS</h2>
+            <ol class="steps">
+              <li>
+                <h3>Check the version</h3>
+                <p>macOS often ships with Python 3. Run <code>python3 --version</code>. If a version is reported, no separate installation is needed.</p>
+              </li>
+              <li>
+                <h3>Install from python.org or Homebrew</h3>
+                <p>The universal installer is available at <a href="https://www.python.org/downloads/macos/" target="_blank" rel="noopener">python.org/downloads/macos</a>. If Homebrew is installed, this is simpler:</p>
+                <div class="code-block">
+                  <div class="code-block__bar">
+                    <span class="code-block__lang">Bash</span>
+                    <button type="button" class="copy-btn" data-copy data-i18n="guide.copy">Copy</button>
+                  </div>
+                  <pre><code class="language-bash">brew install python</code></pre>
+                </div>
+              </li>
+              <li>
+                <h3>Check pip</h3>
+                <p>Run <code>python3 --version</code> and <code>pip3 --version</code>. The <code>python</code> command may be missing or point to an old version on macOS — use <code>python3</code>.</p>
+              </li>
+            </ol>
+          </section>
+
+          <section class="guide-section" id="linux-en">
+            <h2>4. Install on Linux</h2>
+            <p>Most distributions already include Python 3. If yours does not, use the package manager:</p>
+            <div class="code-block">
+              <div class="code-block__bar">
+                <span class="code-block__lang">Bash</span>
+                <button type="button" class="copy-btn" data-copy data-i18n="guide.copy">Copy</button>
+              </div>
+              <pre><code class="language-bash"># Ubuntu / Debian
+sudo apt update
+sudo apt install python3 python3-pip python3-venv
+
+# Fedora
+sudo dnf install python3 python3-pip
+
+# Arch Linux
+sudo pacman -S python python-pip</code></pre>
+            </div>
+            <div class="callout">Do not remove the system Python — distribution tools depend on it. Use a virtual environment for your own projects.</div>
+          </section>
+
+          <section class="guide-section" id="verify-en">
+            <h2>5. Verify the installation</h2>
+            <p>Make sure Python, pip and the venv module are available:</p>
+            <div class="code-block">
+              <div class="code-block__bar">
+                <span class="code-block__lang">Terminal</span>
+                <button type="button" class="copy-btn" data-copy data-i18n="guide.copy">Copy</button>
+              </div>
+              <pre><code class="language-bash">python3 --version
+pip3 --version
+python3 -m venv --help</code></pre>
+            </div>
+            <p>If pip is missing, enable it manually: <code>python3 -m ensurepip --upgrade</code> on Linux and macOS, or <code>py -m ensurepip --upgrade</code> on Windows.</p>
+          </section>
+
+          <section class="guide-section" id="venv-en">
+            <h2>6. First program and a virtual environment</h2>
+            <p>Create a project folder and a <code>.venv</code> environment so project dependencies stay separate from system packages:</p>
+            <div class="code-block">
+              <div class="code-block__bar">
+                <span class="code-block__lang">Terminal</span>
+                <button type="button" class="copy-btn" data-copy data-i18n="guide.copy">Copy</button>
+              </div>
+              <pre><code class="language-bash">mkdir myproject
+cd myproject
+python3 -m venv .venv</code></pre>
+            </div>
+            <p>Activate the environment:</p>
+            <div class="code-block">
+              <div class="code-block__bar">
+                <span class="code-block__lang">Terminal</span>
+                <button type="button" class="copy-btn" data-copy data-i18n="guide.copy">Copy</button>
+              </div>
+              <pre><code class="language-bash"># Windows (PowerShell)
+.venv\Scripts\Activate.ps1
+
+# macOS / Linux
+source .venv/bin/activate</code></pre>
+            </div>
+            <p>Create a file named <code>hello.py</code>:</p>
+            <div class="code-block">
+              <div class="code-block__bar">
+                <span class="code-block__lang">Python</span>
+                <button type="button" class="copy-btn" data-copy data-i18n="guide.copy">Copy</button>
+              </div>
+              <pre><code class="language-python">print("Hello, Python!")</code></pre>
+            </div>
+            <p>Run it with <code>python3 hello.py</code> (<code>py hello.py</code> on Windows). Inside an active environment install packages with <code>pip install requests</code> and save the dependency list with <code>pip freeze &gt; requirements.txt</code>.</p>
+          </section>
+
+          <section class="guide-section" id="problems-en">
+            <h2>7. Common problems</h2>
+            <ul>
+              <li><strong>The <code>python</code> command is missing, but <code>python3</code> works.</strong> Use <code>python3</code> or create a shell alias.</li>
+              <li><strong>Windows: the PATH checkbox was missed.</strong> Reinstall Python with <strong>Add python.exe to PATH</strong> ticked, or add the install folder to PATH manually.</li>
+              <li><strong><code>externally-managed-environment</code> error.</strong> Ubuntu 23.04+ and Debian 12 block packages in the system Python. Create a venv or use <code>pipx</code>.</li>
+              <li><strong>pip is missing.</strong> Run <code>python3 -m ensurepip --upgrade</code>.</li>
+              <li><strong>Multiple Python versions.</strong> On Windows, <code>py -0</code> lists them and <code>py -3.12</code> runs a specific version.</li>
+              <li><strong>Permission denied while installing a package.</strong> Do not use <code>sudo pip</code> — work inside a virtual environment.</li>
+            </ul>
+          </section>
+
+          <section class="guide-section" id="next-en">
+            <h2>8. What next</h2>
+            <p>Once Python is installed, move on to practice: syntax, variables, conditions and your first projects.</p>
+            <div class="link-cards">
+              <a class="link-card" href="guide.html?lang=python">
+                <strong>Python guide</strong>
+                <span>A complete step-by-step introduction for beginners.</span>
+                <span class="arrow">Open the guide →</span>
+              </a>
+              <a class="link-card" href="install-linux.html">
+                <strong>Languages on Linux</strong>
+                <span>Install commands for Python, Node.js, Go, Rust and more.</span>
+                <span class="arrow">Open →</span>
+              </a>
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <aside class="guide-toc" aria-label="Содержание гайда" data-i18n-aria="guide.tocAria">
+        <div data-lang-block="ru">
+          <h2>Содержание</h2>
+          <ol>
+            <li><a href="#check">Проверка</a></li>
+            <li><a href="#windows">Windows</a></li>
+            <li><a href="#macos">macOS</a></li>
+            <li><a href="#linux">Linux</a></li>
+            <li><a href="#verify">Проверка установки</a></li>
+            <li><a href="#venv">Первая программа</a></li>
+            <li><a href="#problems">Частые проблемы</a></li>
+            <li><a href="#next">Что дальше</a></li>
+          </ol>
+        </div>
+        <div data-lang-block="en">
+          <h2>Contents</h2>
+          <ol>
+            <li><a href="#check-en">Check</a></li>
+            <li><a href="#windows-en">Windows</a></li>
+            <li><a href="#macos-en">macOS</a></li>
+            <li><a href="#linux-en">Linux</a></li>
+            <li><a href="#verify-en">Verify</a></li>
+            <li><a href="#venv-en">First program</a></li>
+            <li><a href="#problems-en">Common problems</a></li>
+            <li><a href="#next-en">What next</a></li>
+          </ol>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <p data-i18n="footer.catalog">My-side · каталог гайдов по языкам программирования</p>
+    <p><a href="../index.html" data-i18n="footer.back">Вернуться в каталог</a></p>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script src="../js/app.js"></script>
+  <script src="../js/install.js"></script>
+</body>
+</html>

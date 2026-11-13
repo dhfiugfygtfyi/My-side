@@ -286,6 +286,13 @@ img {
   outline-offset: 1px;
 }
 
+/* ---------- двуязычные блоки страниц установки ---------- */
+
+html[data-lang="ru"] [data-lang-block="en"],
+html[data-lang="en"] [data-lang-block="ru"] {
+  display: none;
+}
+
 .greeting {
   font-size: 0.92rem;
   color: var(--muted);
@@ -846,6 +853,15 @@ img {
   margin-bottom: 6px;
 }
 
+.guide-hero > div {
+  min-width: 0;
+}
+
+.guide-hero h1,
+.guide-hero .tagline {
+  overflow-wrap: anywhere;
+}
+
 .guide-hero .tagline {
   color: var(--muted);
   font-size: 1rem;
@@ -889,6 +905,13 @@ img {
 
 .guide-section p + p {
   margin-top: 12px;
+}
+
+.guide-section p,
+.guide-section li,
+.guide-section a,
+.guide-section code {
+  overflow-wrap: anywhere;
 }
 
 .guide-section ul,
@@ -1070,6 +1093,7 @@ img {
 
 .callout {
   display: flex;
+  flex-wrap: wrap;
   gap: 12px;
   margin: 16px 0;
   padding: 14px 16px;
@@ -1078,6 +1102,7 @@ img {
   border: 1px solid color-mix(in srgb, var(--accent) 35%, transparent);
   color: var(--text);
   font-size: 0.9rem;
+  overflow-wrap: anywhere;
 }
 
 .callout::before {

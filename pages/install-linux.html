@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="ru" data-lang="ru" data-theme="dark" data-base="../" data-title-key="installLinux.title">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Как установить языки программирования на Linux — My-side</title>
+  <meta name="description" content="Команды установки Python, Node.js, C и C++, Java, C#, Go, Rust, PHP, Ruby и Kotlin для Ubuntu/Debian, Fedora и Arch Linux." data-i18n-content="installLinux.description">
+  <link rel="icon" href="../favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16.png">
+  <link rel="stylesheet" href="../css/style.css?v=3">
+  <link rel="stylesheet" id="hljs-dark" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+  <link rel="stylesheet" id="hljs-light" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css" disabled>
+  <script src="../js/theme.js"></script>
+  <script src="../js/i18n.js?v=3"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a class="brand" href="../index.html">
+        <span class="brand-mark" aria-hidden="true">◈</span>
+        <span class="brand-name">My<span class="brand-accent">-side</span></span>
+      </a>
+      <nav class="nav" id="site-nav" aria-label="Основная навигация" data-i18n-aria="nav.aria">
+        <a href="../index.html" data-i18n="nav.catalog">Каталог</a>
+        <a href="install-python.html" data-i18n="nav.installPython">Установка Python</a>
+        <a class="is-active" href="install-linux.html" aria-current="page" data-i18n="nav.installLinux">Языки на Linux</a>
+      </nav>
+      <div class="header-actions">
+        <button type="button" class="theme-toggle" data-theme-toggle aria-label="Переключить тему" aria-pressed="false">☀️</button>
+        <div class="lang-switch" data-lang-switch role="group" aria-label="Язык сайта" data-i18n-aria="lang.aria">
+          <button type="button" class="lang-btn" data-lang="en" aria-pressed="false" title="English">En</button>
+          <button type="button" class="lang-btn" data-lang="ru" aria-pressed="false" title="Русский">Ru</button>
+        </div>
+        <div class="auth-area" data-auth-area></div>
+        <button type="button" class="nav-toggle" data-nav-toggle aria-label="Открыть меню" data-i18n-aria="nav.openMenu" aria-expanded="false" aria-controls="site-nav">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="guide-page">
+    <nav class="breadcrumbs" aria-label="Хлебные крошки" data-i18n-aria="guide.breadcrumbsAria">
+      <a href="../index.html" data-i18n="guide.catalog">Каталог языков</a>
+      <span class="sep">/</span>
+      <span data-i18n="installLinux.crumb">Языки на Linux</span>
+    </nav>
+
+    <section class="guide-hero">
+      <div class="guide-hero__icon" aria-hidden="true">🐧</div>
+      <div data-lang-block="ru">
+        <h1>Как установить языки программирования на Linux</h1>
+        <p class="tagline">Готовые команды для Ubuntu/Debian, Fedora и Arch Linux: Python, Node.js, C и C++, Java, C#, Go, Rust, PHP, Ruby, Kotlin и другие.</p>
+        <div class="guide-meta">
+          <span class="stat-pill">apt</span>
+          <span class="stat-pill">dnf</span>
+          <span class="stat-pill">pacman</span>
+          <span class="stat-pill">≈ 15 минут</span>
+        </div>
+      </div>
+      <div data-lang-block="en">
+        <h1>How to install programming languages on Linux</h1>
+        <p class="tagline">Ready-to-run commands for Ubuntu/Debian, Fedora and Arch Linux: Python, Node.js, C and C++, Java, C#, Go, Rust, PHP, Ruby, Kotlin and more.</p>
+        <div class="guide-meta">
+          <span class="stat-pill">apt</span>
+          <span class="stat-pill">dnf</span>
+          <span class="stat-pill">pacman</span>
+          <span class="stat-pill">≈ 15 minutes</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="guide-layout">
+      <div class="guide-content">
+        <div data-lang-block="ru">
+          <section class="guide-section" id="prep">
+            <h2>1. Подготовка системы</h2>
+            <p>Команды зависят от дистрибутива. Сначала обновите список пакетов:</p>
+            <div class="code-block">
+              <div class="code-block__bar">
+                <span class="code-block__lang">Bash</span>
+                <button type="button" class="copy-btn" data-copy data-i18n="guide.copy">Копировать</button>
+              </div>
+              <pre><code class="language-bash"># Ubuntu / Debian
+sudo apt update
+
+# Fedora
+sudo dnf check-update
+
+# Arch Linux
+sudo pacman -Sy</code></pre>
+            </div>
+            <p>Почти для всех языков пригодятся базовые инструменты сборки, git и curl:</p>
+            <div class="code-block">
+              <div class="code-block__bar">
+                <span class="code-block__lang">Bash</span>
+                <button type="button" class="copy-btn" data-copy data-i18n="guide.copy">Копировать</button>
+              </div>
+              <pre><code class="language-bash"># Ubuntu / Debian
+sudo apt install build-essential git curl
+
+# Fedora
+sudo dnf groupinstall "Development Tools"
+sudo dnf install git curl
+
+# Arch Linux
+sudo pacman -S base-devel git curl</code></pre>
+            </div>
+            <div class="callout"><code>sudo</code> нужен только для системных пакетов. Библиотеки языка ставьте в пользовательское окружение или через менеджеры версий: pyenv, nvm, rustup, sdkman.</div>
+          </section>
+
+          <section class="guide-section" id="python">
+            <h2>2. Python</h2>
+            <p>В большинстве дистрибутивов Python 3 уже есть. Если нет — установите вместе с pip и venv:</p>
+            <div class="code-block">
+              <div class="code-block__bar">
+                <span class="code-block__lang">Bash</span>
+                <button type="button" class="copy-btn" data-copy data-i18n="guide.copy">Копировать</button>
+              </div>
+              <pre><code class="language-bash"># Ubuntu / Debian
+sudo apt install python3 python3-pip python3-venv
+
+# Fedora
+sudo dnf install python3 python3-pip
+
+# Arch Linux
+sudo pacman -S python python-pip</code></pre>
+            </div>
+            <p>Проверка: <code>python3 --version</code>. Для проектов создавайте окружение: <code>python3 -m venv .venv</code>.</p>
+          </section>
+
+          <section class="guide-section" id="node">
+            <h2>3. JavaScript и Node.js</h2>
+            <p>Версия Node.js из репозиториев дистрибутива часто отстаёт. Надёжнее поставить nvm — менеджер версий Node.js:</p>
+            <div class="code-block">
+              <div class="code-block__bar">
+                <span class="code-block__lang">Bash</span>
+                <button type="button" class="copy-btn" data-copy data-i18n="guide.copy">Копировать</button>
+              </div>
+              <pre><code class="language-bash">curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
+# перезапустите терминал
+nvm install --lts
+node --version
+npm --version</code></pre>
+            </div>
+            <p>Если нужна версия из репозитория дистрибутива:</p>
+            <div class="code-block">
+              <div class="code-block__bar">
+                <span class="code-block__lang">Bash</span>
+                <button type="button" class="copy-btn" data-copy data-i18n="guide.copy">Копировать</button>
+              </div>
+              <pre><code class="language-bash"># Ubuntu / Debian
+sudo apt install nodejs npm
+
+# Fedora
+sudo dnf install nodejs npm
+
+# Arch Linux
+sudo pacman -S nodejs npm</code></pre>
+            </div>
+          </section>
+
+          <section class="guide-section" id="cpp">
+            <h2>4. C и C++</h2>
+            <p>Компиляторы GCC/G++ и make входят в набор инструментов разработчика:</p>
+            <div class="code-block">
+              <div class="code-block__bar">
+                <span class="code-block__lang">Bash</span>
+                <button type="button" class="copy-btn" data-copy data-i18n="guide.copy">Копировать</button>
+              </div>
+              <pre><code class="language-bash"># Ubuntu / Debian
+sudo apt install build-essential
+
+# Fedora
+sudo dnf install gcc gcc-c++ make
+
+# Arch Linux
+sudo pacman -S base-devel</code></pre>
+            </div>
+            <p>Проверка: <code>gcc --version</code> и <code>g++ --version</code>. Вместо GCC можно поставить Clang: <code>sudo apt install clang</code>, <code>sudo dnf install clang</code> или <code>sudo pacman -S clang</code>.</p>
+          </section>
+
+          <section class="guide-section" id="java">
+            <h2>5. Java</h2>
+            <p>Установите JDK — он включает и компилятор <code>javac</code>, и среду выполнения:</p>
+            <div class="code-block">
+              <div class="code-block__bar">
+                <span class="code-block__lang">Bash</span>
+                <button type="button" class="copy-btn" data-copy data-i18n="guide.copy">Копировать</button>
+              </div>
+              <pre><code class="language-bash"># Ubuntu / Debian (JDK 21)
+sudo apt install openjdk-21-jdk
+
+# Fedora
+sudo dnf install java-21-openjdk-devel
+
+# Arch Linux
+sudo pacman -S jdk-openjdk</code></pre>
+            </div>
+            <p>Проверка: <code>java -version</code> и <code>javac -version</code>. Для нескольких версий JDK удобен sdkman.</p>
+          </section>
+
+          <section class="guide-section" id="dotnet">
+            <h2>6. C# и .NET</h2>
+            <p>В Ubuntu 24.04+ пакет .NET 8 есть в официальном репозитории:</p>
+            <div class="code-block">
+              <div class="code-block__bar">
+                <span class="code-block__lang">Bash</span>
+                <button type="button" class="copy-btn" data-copy data-i18n="guide.copy">Копировать</button>
+              </div>
+              <pre><code class="language-bash">sudo apt install dotnet-sdk-8.0
+dotnet --version</code></pre>
+            </div>
+            <p>Если пакет не найден, подключите репозиторий Microsoft по инструкции на <a href="https://learn.microsoft.com/dotnet/core/install/linux" target="_blank" rel="noopener">learn.microsoft.com/dotnet</a> или используйте официальный скрипт:</p>
+            <div class="code-block">
+              <div class="code-block__bar">
+                <span class="code-block__lang">Bash</span>
+                <button type="button" class="copy-btn" data-copy data-i18n="guide.copy">Копировать</button>
+              </div>
+              <pre><code class="language-bash">curl -sSL https://dot.net/v1/dotnet-install.sh | bash /dev/stdin --channel 8.0
+echo 'export PATH=$PATH:$HOME/.dotnet' &gt;&gt; ~/.profile
+source ~/.profile
+dotnet --version</code></pre>
+            </div>
+          </section>
+
+          <section class="guide-section" id="go">
+            <h2>7. Go</h2>
+            <div class="code-block">
+              <div class="code-block__bar">
+                <span class="code-block__lang">Bash</span>
+                <button type="button" class="copy-btn" data-copy data-i18n="guide.copy">Копировать</button>
+              </div>
+              <pre><code class="language-bash"># Ubuntu / Debian
+sudo apt install golang-go
+
+# Fedora
+sudo dnf install golang
+
+# Arch Linux
+sudo pacman -S go</code></pre>
+            </div>
+            <p>Версия из репозитория может отставать. Официальный способ — скачать актуальный архив с <a href="https://go.dev/dl/" target="_blank" rel="noopener">go.dev/dl</a>:</p>
+            <div class="code-block">
+              <div class="code-block__bar">
+                <span class="code-block__lang">Bash</span>
+                <button type="button" class="copy-btn" data-copy data-i18n="guide.copy">Копировать</button>
+              </div>
+              <pre><code class="language-bash">curl -LO https://go.dev/dl/go1.23.4.linux-amd64.tar.gz
+sudo rm -rf /usr/local/go
+sudo tar -C /usr/local -xzf go1.23.4.linux-amd64.tar.gz
+echo 'export PATH=$PATH:/usr/local/go/bin' &gt;&gt; ~/.profile
+source ~/.profile
+go version</code></pre>
+            </div>
+          </section>
+
+          <section class="guide-section" id="rust">
+            <h2>8. Rust</h2>
+            <p>Официальный установщик rustup ставит компилятор и cargo в домашнюю папку:</p>
+            <div class="code-block">
+              <div class="code-block__bar">
+                <span class="code-block__lang">Bash</span>
+                <button type="button" class="copy-btn" data-copy data-i18n="guide.copy">Копировать</button>
+              </div>
+              <pre><code class="language-bash">curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+source "$HOME/.cargo/env"
+rustc --version
+cargo --version</code></pre>
+            </div>
+            <p>Или версия из репозитория дистрибутива:</p>
+            <div class="code-block">
+              <div class="code-block__bar">
+                <span class="code-block__lang">Bash</span>
+                <button type="button" class="copy-btn" data-copy data-i18n="guide.copy">Копировать</button>
+              </div>
+              <pre><code class="language-bash">sudo apt install rustc cargo
+sudo dnf install rust cargo
+sudo pacman -S rust</code></pre>
+            </div>
+          </section>
+
+          <section class="guide-section" id="php">
+            <h2>9. PHP, Ruby, Kotlin и другие</h2>
+            <p>PHP:</p>
+            <div class="code-block">
+              <div class="code-block__bar">
+                <span class="code-block__lang">Bash</span>
+                <button type="button" class="copy-btn" data-copy data-i18n="guide.copy">Копировать</button>
+              </div>
+              <pre><code class="language-bash">sudo apt install php php-cli php-mbstring
+sudo dnf install php-cli php-mbstring
+sudo pacman -S php</code></pre>
+            </div>
+            <p>Ruby:</p>
+            <div class="code-block">
+              <div class="code-block__bar">
+                <span class="code-block__lang">Bash</span>
+                <button type="button" class="copy-btn" data-copy data-i18n="guide.copy">Копировать</button>
+              </div>
+              <pre><code class="language-bash">sudo apt install ruby-full
+sudo dnf install ruby
+sudo pacman -S ruby</code></pre>
+            </div>
+            <p>Kotlin через snap или sdkman:</p>
+            <div class="code-block">
+              <div class="code-block__bar">
+                <span class="code-block__lang">Bash</span>
+                <button type="button" class="copy-btn" data-copy data-i18n="guide.copy">Копировать</button>
+              </div>
+              <pre><code class="language-bash">sudo snap install kotlin --classic
+
+# или sdkman
+curl -s "https://get.sdkman.io" | bash
+sdk install kotlin</code></pre>
+            </div>
+            <p>Lua и Perl обычно есть в репозиториях: <code>sudo apt install lua5.4 perl</code>, <code>sudo dnf install lua perl</code>, <code>sudo pacman -S lua perl</code>.</p>
+          </section>
+
+          <section class="guide-section" id="verify">
+            <h2>10. Проверка всех версий</h2>
+            <p>Одна команда на каждый язык — удобно проверить, что всё установилось:</p>
+            <div class="code-block">
+              <div class="code-block__bar">
+                <span class="code-block__lang">Bash</span>
+                <button type="button" class="copy-btn" data-copy data-i18n="guide.copy">Копировать</button>
+              </div>
+              <pre><code class="language-bash">python3 --version
+node --version
+gcc --version | head -n1
+g++ --version | head -n1
+java -version
+dotnet --version
+go version
+rustc --version
+php --version | head -n1
+ruby --version
+kotlin -version</code></pre>
+            </div>
+            <div class="callout">Если сразу после установки команда не найдена, откройте новый терминал — оболочка должна заново прочитать PATH.</div>
+          </section>
+
+          <section class="guide-section" id="problems">
+            <h2>11. Частые проблемы</h2>
+            <ul>
+              <li><strong><code>E: Unable to locate package</code>.</strong> Выполните <code>sudo apt update</code> и проверьте имя пакета для вашей версии дистрибутива.</li>
+              <li><strong><code>command not found</code> после установки.</strong> Откройте новый терминал или проверьте PATH. Для скриптов, добавленных в <code>~/.profile</code>, нужен повторный вход.</li>
+              <li><strong>Старая версия из репозитория.</strong> Используйте официальный установщик или менеджер версий: nvm, pyenv, rustup, sdkman.</li>
+              <li><strong><code>Permission denied</code> при установке библиотек.</strong> Не используйте sudo для pip, npm и cargo — ставьте пакеты в пользовательское окружение.</li>
+              <li><strong>Конфликт версий.</strong> Держите версии изолированно: venv для Python, nvm для Node.js, sdkman для Java и Kotlin, rustup для Rust.</li>
+              <li><strong>Мало места на диске.</strong> Очистите кэш пакетов: <code>sudo apt clean</code>, <code>sudo dnf clean all</code> или <code>sudo pacman -Sc</code>.</li>
+            </ul>
+          </section>
+
+          <section class="guide-section" id="next">
+            <h2>12. Что дальше</h2>
+            <p>Выберите язык и переходите к первому проекту — в каталоге есть пошаговые гайды.</p>
+            <div class="link-cards">
+              <a class="link-card" href="../index.html">
+                <strong>Каталог языков</strong>
+                <span>Python, JavaScript, C++, Java, Go, Rust и другие с поиском и фильтрами.</span>
+                <span class="arrow">Открыть каталог →</span>
+              </a>
+              <a class="link-card" href="install-python.html">
+                <strong>Установка Python</strong>
+                <span>Подробно для Windows, macOS и Linux: PATH, pip и venv.</span>
+                <span class="arrow">Открыть →</span>
+              </a>
+            </div>
+          </section>
+        </div>
+
+        <div data-lang-block="en">
+          <section class="guide-section" id="prep-en">
+            <h2>1. Prepare the system</h2>
+            <p>Commands depend on the distribution. Refresh the package index first:</p>
+            <div class="code-block">
+              <div class="code-block__bar">
+                <span class="code-block__lang">Bash</span>
+                <button type="button" class="copy-btn" data-copy data-i18n="guide.copy">Copy</button>
+              </div>
+              <pre><code class="language-bash"># Ubuntu / Debian
+sudo apt update
+
+# Fedora
+sudo dnf check-update
+
+# Arch Linux
+sudo pacman -Sy</code></pre>
+            </div>
+            <p>Most languages need basic build tools, git and curl:</p>
+            <div class="code-block">
+              <div class="code-block__bar">
+                <span class="code-block__lang">Bash</span>
+                <button type="button" class="copy-btn" data-copy data-i18n="guide.copy">Copy</button>
+              </div>
+              <pre><code class="language-bash"># Ubuntu / Debian
+sudo apt install build-essential git curl
+
+# Fedora
+sudo dnf groupinstall "Development Tools"
+sudo dnf install git curl
+
+# Arch Linux
+sudo pacman -S base-devel git curl</code></pre>
+            </div>
+            <div class="callout">Use <code>sudo</code> only for system packages. Install language libraries in a user environment or with version managers: pyenv, nvm, rustup, sdkman.</div>
+          </section>
+
+          <section class="guide-section" id="python-en">
+            <h2>2. Python</h2>
+            <p>Most distributions already include Python 3. If yours does not, install it together with pip and venv:</p>
+            <div class="code-block">
+              <div class="code-block__bar">
+                <span class="code-block__lang">Bash</span>
+                <button type="button" class="copy-btn" data-copy data-i18n="guide.copy">Copy</button>
+              </div>
+              <pre><code class="language-bash"># Ubuntu / Debian
+sudo apt install python3 python3-pip python3-venv
+
+# Fedora
+sudo dnf install python3 python3-pip
+
+# Arch Linux
+sudo pacman -S python python-pip</code></pre>
+            </div>
+            <p>Check it with <code>python3 --version</code>. For projects, create an environment: <code>python3 -m venv .venv</code>.</p>
+          </section>
+
+          <section class="guide-section" id="node-en">
+            <h2>3. JavaScript and Node.js</h2>
+            <p>The Node.js version in distribution repositories is often outdated. nvm, the Node.js version manager, is more reliable:</p>
+            <div class="code-block">
+              <div class="code-block__bar">
+                <span class="code-block__lang">Bash</span>
+                <button type="button" class="copy-btn" data-copy data-i18n="guide.copy">Copy</button>
+              </div>
+              <pre><code class="language-bash">curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
+# restart the terminal
+nvm install --lts
+node --version
+npm --version</code></pre>
+            </div>
+            <p>If you prefer the distribution package:</p>
+            <div class="code-block">
+              <div class="code-block__bar">
+                <span class="code-block__lang">Bash</span>
+                <button type="button" class="copy-btn" data-copy data-i18n="guide.copy">Copy</button>
+              </div>
+              <pre><code class="language-bash"># Ubuntu / Debian
+sudo apt install nodejs npm
+
+# Fedora
+sudo dnf install nodejs npm
+
+# Arch Linux
+sudo pacman -S nodejs npm</code></pre>
+            </div>
+          </section>
+
+          <section class="guide-section" id="cpp-en">
+            <h2>4. C and C++</h2>
+            <p>GCC/G++ compilers and make are part of the development tools group:</p>
+            <div class="code-block">
+              <div class="code-block__bar">
+                <span class="code-block__lang">Bash</span>
+                <button type="button" class="copy-btn" data-copy data-i18n="guide.copy">Copy</button>
+              </div>
+              <pre><code class="language-bash"># Ubuntu / Debian
+sudo apt install build-essential
+
+# Fedora
+sudo dnf install gcc gcc-c++ make
+
+# Arch Linux
+sudo pacman -S base-devel</code></pre>
+            </div>
+            <p>Check with <code>gcc --version</code> and <code>g++ --version</code>. You can install Clang instead: <code>sudo apt install clang</code>, <code>sudo dnf install clang</code> or <code>sudo pacman -S clang</code>.</p>
+          </section>
+
+          <section class="guide-section" id="java-en">
+            <h2>5. Java</h2>
+            <p>Install a JDK — it includes both the <code>javac</code> compiler and the runtime:</p>
+            <div class="code-block">
+              <div class="code-block__bar">
+                <span class="code-block__lang">Bash</span>
+                <button type="button" class="copy-btn" data-copy data-i18n="guide.copy">Copy</button>
+              </div>
+              <pre><code class="language-bash"># Ubuntu / Debian (JDK 21)
+sudo apt install openjdk-21-jdk
+
+# Fedora
+sudo dnf install java-21-openjdk-devel
+
+# Arch Linux
+sudo pacman -S jdk-openjdk</code></pre>
+            </div>
+            <p>Check with <code>java -version</code> and <code>javac -version</code>. sdkman is handy when you need several JDK versions.</p>
+          </section>
+
+          <section class="guide-section" id="dotnet-en">
+            <h2>6. C# and .NET</h2>
+            <p>Ubuntu 24.04+ ships .NET 8 in the official repository:</p>
+            <div class="code-block">
+              <div class="code-block__bar">
+                <span class="code-block__lang">Bash</span>
+                <button type="button" class="copy-btn" data-copy data-i18n="guide.copy">Copy</button>
+              </div>
+              <pre><code class="language-bash">sudo apt install dotnet-sdk-8.0
+dotnet --version</code></pre>
+            </div>
+            <p>If the package is not found, add the Microsoft repository as described at <a href="https://learn.microsoft.com/dotnet/core/install/linux" target="_blank" rel="noopener">learn.microsoft.com/dotnet</a>, or use the official script:</p>
+            <div class="code-block">
+              <div class="code-block__bar">
+                <span class="code-block__lang">Bash</span>
+                <button type="button" class="copy-btn" data-copy data-i18n="guide.copy">Copy</button>
+              </div>
+              <pre><code class="language-bash">curl -sSL https://dot.net/v1/dotnet-install.sh | bash /dev/stdin --channel 8.0
+echo 'export PATH=$PATH:$HOME/.dotnet' &gt;&gt; ~/.profile
+source ~/.profile
+dotnet --version</code></pre>
+            </div>
+          </section>
+
+          <section class="guide-section" id="go-en">
+            <h2>7. Go</h2>
+            <div class="code-block">
+              <div class="code-block__bar">
+                <span class="code-block__lang">Bash</span>
+                <button type="button" class="copy-btn" data-copy data-i18n="guide.copy">Copy</button>
+              </div>
+              <pre><code class="language-bash"># Ubuntu / Debian
+sudo apt install golang-go
+
+# Fedora
+sudo dnf install golang
+
+# Arch Linux
+sudo pacman -S go</code></pre>
+            </div>
+            <p>The repository version may lag behind. The official way is to download the current archive from <a href="https://go.dev/dl/" target="_blank" rel="noopener">go.dev/dl</a>:</p>
+            <div class="code-block">
+              <div class="code-block__bar">
+                <span class="code-block__lang">Bash</span>
+                <button type="button" class="copy-btn" data-copy data-i18n="guide.copy">Copy</button>
+              </div>
+              <pre><code class="language-bash">curl -LO https://go.dev/dl/go1.23.4.linux-amd64.tar.gz
+sudo rm -rf /usr/local/go
+sudo tar -C /usr/local -xzf go1.23.4.linux-amd64.tar.gz
+echo 'export PATH=$PATH:/usr/local/go/bin' &gt;&gt; ~/.profile
+source ~/.profile
+go version</code></pre>
+            </div>
+          </section>
+
+          <section class="guide-section" id="rust-en">
+            <h2>8. Rust</h2>
+            <p>The official rustup installer puts the compiler and cargo in your home directory:</p>
+            <div class="code-block">
+              <div class="code-block__bar">
+                <span class="code-block__lang">Bash</span>
+                <button type="button" class="copy-btn" data-copy data-i18n="guide.copy">Copy</button>
+              </div>
+              <pre><code class="language-bash">curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+source "$HOME/.cargo/env"
+rustc --version
+cargo --version</code></pre>
+            </div>
+            <p>Or the distribution package:</p>
+            <div class="code-block">
+              <div class="code-block__bar">
+                <span class="code-block__lang">Bash</span>
+                <button type="button" class="copy-btn" data-copy data-i18n="guide.copy">Copy</button>
+              </div>
+              <pre><code class="language-bash">sudo apt install rustc cargo
+sudo dnf install rust cargo
+sudo pacman -S rust</code></pre>
+            </div>
+          </section>
+
+          <section class="guide-section" id="php-en">
+            <h2>9. PHP, Ruby, Kotlin and more</h2>
+            <p>PHP:</p>
+            <div class="code-block">
+              <div class="code-block__bar">
+                <span class="code-block__lang">Bash</span>
+                <button type="button" class="copy-btn" data-copy data-i18n="guide.copy">Copy</button>
+              </div>
+              <pre><code class="language-bash">sudo apt install php php-cli php-mbstring
+sudo dnf install php-cli php-mbstring
+sudo pacman -S php</code></pre>
+            </div>
+            <p>Ruby:</p>
+            <div class="code-block">
+              <div class="code-block__bar">
+                <span class="code-block__lang">Bash</span>
+                <button type="button" class="copy-btn" data-copy data-i18n="guide.copy">Copy</button>
+              </div>
+              <pre><code class="language-bash">sudo apt install ruby-full
+sudo dnf install ruby
+sudo pacman -S ruby</code></pre>
+            </div>
+            <p>Kotlin via snap or sdkman:</p>
+            <div class="code-block">
+              <div class="code-block__bar">
+                <span class="code-block__lang">Bash</span>
+                <button type="button" class="copy-btn" data-copy data-i18n="guide.copy">Copy</button>
+              </div>
+              <pre><code class="language-bash">sudo snap install kotlin --classic
+
+# or sdkman
+curl -s "https://get.sdkman.io" | bash
+sdk install kotlin</code></pre>
+            </div>
+            <p>Lua and Perl are usually available in the repositories: <code>sudo apt install lua5.4 perl</code>, <code>sudo dnf install lua perl</code>, <code>sudo pacman -S lua perl</code>.</p>
+          </section>
+
+          <section class="guide-section" id="verify-en">
+            <h2>10. Check all versions</h2>
+            <p>One command per language — a quick way to confirm everything is installed:</p>
+            <div class="code-block">
+              <div class="code-block__bar">
+                <span class="code-block__lang">Bash</span>
+                <button type="button" class="copy-btn" data-copy data-i18n="guide.copy">Copy</button>
+              </div>
+              <pre><code class="language-bash">python3 --version
+node --version
+gcc --version | head -n1
+g++ --version | head -n1
+java -version
+dotnet --version
+go version
+rustc --version
+php --version | head -n1
+ruby --version
+kotlin -version</code></pre>
+            </div>
+            <div class="callout">If a command is not found right after installation, open a new terminal so the shell reloads PATH.</div>
+          </section>
+
+          <section class="guide-section" id="problems-en">
+            <h2>11. Common problems</h2>
+            <ul>
+              <li><strong><code>E: Unable to locate package</code>.</strong> Run <code>sudo apt update</code> and check the package name for your distribution version.</li>
+              <li><strong><code>command not found</code> after installation.</strong> Open a new terminal or check PATH. Scripts added to <code>~/.profile</code> require a new login session.</li>
+              <li><strong>An old version from the repository.</strong> Use the official installer or a version manager: nvm, pyenv, rustup, sdkman.</li>
+              <li><strong><code>Permission denied</code> when installing libraries.</strong> Do not use sudo with pip, npm or cargo — install packages in a user environment.</li>
+              <li><strong>Version conflicts.</strong> Keep versions isolated: venv for Python, nvm for Node.js, sdkman for Java and Kotlin, rustup for Rust.</li>
+              <li><strong>Running out of disk space.</strong> Clean the package cache: <code>sudo apt clean</code>, <code>sudo dnf clean all</code> or <code>sudo pacman -Sc</code>.</li>
+            </ul>
+          </section>
+
+          <section class="guide-section" id="next-en">
+            <h2>12. What next</h2>
+            <p>Pick a language and start your first project — the catalog has step-by-step guides.</p>
+            <div class="link-cards">
+              <a class="link-card" href="../index.html">
+                <strong>Language catalog</strong>
+                <span>Python, JavaScript, C++, Java, Go, Rust and more with search and filters.</span>
+                <span class="arrow">Open the catalog →</span>
+              </a>
+              <a class="link-card" href="install-python.html">
+                <strong>Install Python</strong>
+                <span>Detailed steps for Windows, macOS and Linux: PATH, pip and venv.</span>
+                <span class="arrow">Open →</span>
+              </a>
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <aside class="guide-toc" aria-label="Содержание гайда" data-i18n-aria="guide.tocAria">
+        <div data-lang-block="ru">
+          <h2>Содержание</h2>
+          <ol>
+            <li><a href="#prep">Подготовка</a></li>
+            <li><a href="#python">Python</a></li>
+            <li><a href="#node">JavaScript / Node.js</a></li>
+            <li><a href="#cpp">C и C++</a></li>
+            <li><a href="#java">Java</a></li>
+            <li><a href="#dotnet">C# и .NET</a></li>
+            <li><a href="#go">Go</a></li>
+            <li><a href="#rust">Rust</a></li>
+            <li><a href="#php">PHP, Ruby, Kotlin</a></li>
+            <li><a href="#verify">Проверка версий</a></li>
+            <li><a href="#problems">Частые проблемы</a></li>
+            <li><a href="#next">Что дальше</a></li>
+          </ol>
+        </div>
+        <div data-lang-block="en">
+          <h2>Contents</h2>
+          <ol>
+            <li><a href="#prep-en">Preparation</a></li>
+            <li><a href="#python-en">Python</a></li>
+            <li><a href="#node-en">JavaScript / Node.js</a></li>
+            <li><a href="#cpp-en">C and C++</a></li>
+            <li><a href="#java-en">Java</a></li>
+            <li><a href="#dotnet-en">C# and .NET</a></li>
+            <li><a href="#go-en">Go</a></li>
+            <li><a href="#rust-en">Rust</a></li>
+            <li><a href="#php-en">PHP, Ruby, Kotlin</a></li>
+            <li><a href="#verify-en">Check versions</a></li>
+            <li><a href="#problems-en">Common problems</a></li>
+            <li><a href="#next-en">What next</a></li>
+          </ol>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <p data-i18n="footer.catalog">My-side · каталог гайдов по языкам программирования</p>
+    <p><a href="../index.html" data-i18n="footer.back">Вернуться в каталог</a></p>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script src="../js/app.js"></script>
+  <script src="../js/install.js"></script>
+</body>
+</html>

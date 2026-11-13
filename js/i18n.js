@@ -21,6 +21,8 @@
       /* ---------- общее ---------- */
       "nav.aria": "Основная навигация",
       "nav.catalog": "Каталог",
+      "nav.installPython": "Установка Python",
+      "nav.installLinux": "Языки на Linux",
       "nav.openMenu": "Открыть меню",
       "theme.toLight": "Включить светлую тему",
       "theme.toDark": "Включить тёмную тему",
@@ -122,6 +124,14 @@
       "code.terminal": "Терминал",
       "code.default": "код",
 
+      /* ---------- установка ---------- */
+      "installPython.title": "Как установить Python — My-side",
+      "installPython.description": "Пошаговая инструкция по установке Python на Windows, macOS и Linux: PATH, pip, виртуальное окружение и решение частых проблем.",
+      "installPython.crumb": "Установка Python",
+      "installLinux.title": "Как установить языки программирования на Linux — My-side",
+      "installLinux.description": "Команды установки Python, Node.js, C и C++, Java, C#, Go, Rust, PHP, Ruby и Kotlin для Ubuntu/Debian, Fedora и Arch Linux.",
+      "installLinux.crumb": "Языки на Linux",
+
       /* ---------- вход ---------- */
       "login.title": "Вход — My-side",
       "login.h1": "Вход",
@@ -191,6 +201,8 @@
       /* ---------- common ---------- */
       "nav.aria": "Main navigation",
       "nav.catalog": "Catalog",
+      "nav.installPython": "Install Python",
+      "nav.installLinux": "Languages on Linux",
       "nav.openMenu": "Open menu",
       "theme.toLight": "Switch to light theme",
       "theme.toDark": "Switch to dark theme",
@@ -291,6 +303,14 @@
       "guide.error.toCatalog": "Go to catalog",
       "code.terminal": "Terminal",
       "code.default": "code",
+
+      /* ---------- installation ---------- */
+      "installPython.title": "How to install Python — My-side",
+      "installPython.description": "Step-by-step guide to installing Python on Windows, macOS and Linux: PATH, pip, virtual environments and common problems.",
+      "installPython.crumb": "Install Python",
+      "installLinux.title": "How to install programming languages on Linux — My-side",
+      "installLinux.description": "Install commands for Python, Node.js, C and C++, Java, C#, Go, Rust, PHP, Ruby and Kotlin on Ubuntu/Debian, Fedora and Arch Linux.",
+      "installLinux.crumb": "Languages on Linux",
 
       /* ---------- login ---------- */
       "login.title": "Log in — My-side",
