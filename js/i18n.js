@@ -418,9 +418,28 @@
     });
   }
 
+  var LANG_LABELS = { en: "En", ru: "Ru" };
+
   function updateSwitcher() {
+    /* Порядок: сначала En, затем Ru — даже если HTML пришёл из кэша. */
+    each(document.querySelectorAll("[data-lang-switch]"), function (switcher) {
+      var en = switcher.querySelector('[data-lang="en"]');
+      var ru = switcher.querySelector('[data-lang="ru"]');
+      if (!en || !ru) return;
+      var enIsAfterRu = (ru.compareDocumentPosition(en) & 4) !== 0;
+      if (enIsAfterRu) switcher.insertBefore(en, ru);
+    });
+
     each(document.querySelectorAll("[data-lang-switch] [data-lang]"), function (button) {
-      var active = button.getAttribute("data-lang") === lang;
+      var code = button.getAttribute("data-lang");
+      var active = code === lang;
+      var label = LANG_LABELS[code];
+
+      /* Подписи всегда сокращённые: En / Ru. */
+      if (label && button.textContent.trim() !== label) {
+        button.textContent = label;
+      }
+
       button.classList.toggle("is-active", active);
       button.setAttribute("aria-pressed", active ? "true" : "false");
     });
@@ -482,6 +501,8 @@
       } else {
         url.searchParams.delete("hl");
       }
+      /* Сбрасываем кэш GitHub Pages, чтобы подписи и тексты были свежими. */
+      url.searchParams.set("v", String(Date.now()));
       window.location.href = url.toString();
       return;
     }
